@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="BrokerServer Basics   键 设定值 描述     broker.id none 每个broker的唯一标识    Socket Server Settings   键 设定值 描述     host.name ip broker的主机名   num.network.threads 3 处理网络请求的线程数   num.io.threads 8 处理磁盘的线程数   socket">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kafka 主要配置参数概览">
+<meta property="og:url" content="http://yoursite.com/2017/12/14/kafka_config/index.html">
+<meta property="og:site_name" content="追寻事">
+<meta property="og:description" content="BrokerServer Basics   键 设定值 描述     broker.id none 每个broker的唯一标识    Socket Server Settings   键 设定值 描述     host.name ip broker的主机名   num.network.threads 3 处理网络请求的线程数   num.io.threads 8 处理磁盘的线程数   socket">
+<meta property="og:updated_time" content="2017-12-12T04:33:44.267Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kafka 主要配置参数概览">
+<meta name="twitter:description" content="BrokerServer Basics   键 设定值 描述     broker.id none 每个broker的唯一标识    Socket Server Settings   键 设定值 描述     host.name ip broker的主机名   num.network.threads 3 处理网络请求的线程数   num.io.threads 8 处理磁盘的线程数   socket">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/14/kafka_config/"/>
+
+
+
+
+
+  <title>Kafka 主要配置参数概览 | 追寻事</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">追寻事</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/14/kafka_config/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ted1769">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="追寻事">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Kafka 主要配置参数概览</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-14T11:33:19+08:00">
+                2017-12-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Broker"><a href="#Broker" class="headerlink" title="Broker"></a><strong>Broker</strong></h2><h4 id="Server-Basics"><a href="#Server-Basics" class="headerlink" title="Server Basics"></a><strong>Server Basics</strong></h4><table>
+<thead>
+<tr>
+<th>键</th>
+<th style="text-align:center">设定值</th>
+<th style="text-align:right">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>broker.id</td>
+<td style="text-align:center">none</td>
+<td style="text-align:right">每个broker的唯一标识</td>
+</tr>
+</tbody>
+</table>
+<h4 id="Socket-Server-Settings"><a href="#Socket-Server-Settings" class="headerlink" title="Socket Server Settings"></a><strong>Socket Server Settings</strong></h4><table>
+<thead>
+<tr>
+<th>键</th>
+<th style="text-align:center">设定值</th>
+<th style="text-align:right">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>host.name</td>
+<td style="text-align:center">ip</td>
+<td style="text-align:right">broker的主机名</td>
+</tr>
+<tr>
+<td>num.network.threads</td>
+<td style="text-align:center">3</td>
+<td style="text-align:right">处理网络请求的线程数</td>
+</tr>
+<tr>
+<td>num.io.threads</td>
+<td style="text-align:center">8</td>
+<td style="text-align:right">处理磁盘的线程数</td>
+</tr>
+<tr>
+<td>socket.send.buffer.bytes</td>
+<td style="text-align:center">102400</td>
+<td style="text-align:right">满这个数才发送</td>
+</tr>
+<tr>
+<td>socket.receive.buffer.bytes</td>
+<td style="text-align:center">102400</td>
+<td style="text-align:right">满这个数才写入磁盘</td>
+</tr>
+<tr>
+<td>socket.request.max.bytes</td>
+<td style="text-align:center">104857600</td>
+<td style="text-align:right">单次最大请求字节数(防止OOM)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="Log-Basics"><a href="#Log-Basics" class="headerlink" title="Log Basics"></a><strong>Log Basics</strong></h4><table>
+<thead>
+<tr>
+<th>键</th>
+<th style="text-align:center">设定值</th>
+<th style="text-align:right">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>log.dirs</td>
+<td style="text-align:center"></td>
+<td style="text-align:right">日志存放路径</td>
+</tr>
+<tr>
+<td>num.partitions</td>
+<td style="text-align:center">1</td>
+<td style="text-align:right">每个topic默认 partition 数</td>
+</tr>
+</tbody>
+</table>
+<h4 id="Log-Retention-Policy"><a href="#Log-Retention-Policy" class="headerlink" title="Log Retention Policy"></a><strong>Log Retention Policy</strong></h4><table>
+<thead>
+<tr>
+<th>键</th>
+<th style="text-align:center">设定值</th>
+<th style="text-align:right">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>log.retention.hours</td>
+<td style="text-align:center">none</td>
+<td style="text-align:right">保存多长时间日志</td>
+</tr>
+<tr>
+<td>log.retention.bytes</td>
+<td style="text-align:center">1073741824</td>
+<td style="text-align:right">超过这个大小，日志被裁减（不知怎么用）</td>
+</tr>
+<tr>
+<td>log.segment.bytes</td>
+<td style="text-align:center">1073741824</td>
+<td style="text-align:right">累计日志大小超过这个，新建一个</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Producer"><a href="#Producer" class="headerlink" title="Producer"></a><strong>Producer</strong></h2><h4 id="Producer-Basics"><a href="#Producer-Basics" class="headerlink" title="Producer Basics"></a><strong>Producer Basics</strong></h4><table>
+<thead>
+<tr>
+<th>键</th>
+<th style="text-align:center">设定值</th>
+<th style="text-align:right">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>metadata.broker.list</td>
+<td style="text-align:center"></td>
+<td style="text-align:right">broker列表，host:port</td>
+</tr>
+<tr>
+<td>partitioner.class</td>
+<td style="text-align:center"></td>
+<td style="text-align:right">分区策略</td>
+</tr>
+<tr>
+<td>producer.type</td>
+<td style="text-align:center">sync</td>
+<td style="text-align:right">日志发送方式</td>
+</tr>
+<tr>
+<td>compression.code</td>
+<td style="text-align:center">none</td>
+<td style="text-align:right">压缩格式</td>
+</tr>
+<tr>
+<td>serializer.class</td>
+<td style="text-align:center">DefaultEncoder</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Consumer"><a href="#Consumer" class="headerlink" title="Consumer"></a><strong>Consumer</strong></h2><table>
+<thead>
+<tr>
+<th>键</th>
+<th style="text-align:center">设定值</th>
+<th style="text-align:right">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>group.id</td>
+<td style="text-align:center"></td>
+<td style="text-align:right">设置group</td>
+</tr>
+</tbody>
+</table>
+<p>同一topic的一条消息只能被同一个consumer group内的一个consumer消费，但多个consumer group可同时消费这一消息</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/14/go_mem_model/" rel="next" title="Golang内存模型">
+                <i class="fa fa-chevron-left"></i> Golang内存模型
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/14/kafka_reset_topic/" rel="prev" title="Kafka 重置topic">
+                Kafka 重置topic <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">ted1769</p>
+              <p class="site-description motion-element" itemprop="description">一个博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Broker"><span class="nav-number">1.</span> <span class="nav-text"><a href="#Broker" class="headerlink" title="Broker"></a><strong>Broker</strong></span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Server-Basics"><span class="nav-number">1.0.1.</span> <span class="nav-text"><a href="#Server-Basics" class="headerlink" title="Server Basics"></a><strong>Server Basics</strong></span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Socket-Server-Settings"><span class="nav-number">1.0.2.</span> <span class="nav-text"><a href="#Socket-Server-Settings" class="headerlink" title="Socket Server Settings"></a><strong>Socket Server Settings</strong></span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Log-Basics"><span class="nav-number">1.0.3.</span> <span class="nav-text"><a href="#Log-Basics" class="headerlink" title="Log Basics"></a><strong>Log Basics</strong></span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Log-Retention-Policy"><span class="nav-number">1.0.4.</span> <span class="nav-text"><a href="#Log-Retention-Policy" class="headerlink" title="Log Retention Policy"></a><strong>Log Retention Policy</strong></span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Producer"><span class="nav-number">2.</span> <span class="nav-text"><a href="#Producer" class="headerlink" title="Producer"></a><strong>Producer</strong></span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Producer-Basics"><span class="nav-number">2.0.1.</span> <span class="nav-text"><a href="#Producer-Basics" class="headerlink" title="Producer Basics"></a><strong>Producer Basics</strong></span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Consumer"><span class="nav-number">3.</span> <span class="nav-text"><a href="#Consumer" class="headerlink" title="Consumer"></a><strong>Consumer</strong></span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ted1769</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

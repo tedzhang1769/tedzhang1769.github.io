@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="删除topic/opt/kafka/bin/kafka-topics.sh --delete --zookeeper zk01:2181 --topic monitoring 停止kafka进程/opt/kafka/bin/stop.sh 清理kafka的数据/opt/kafka/bin/kafka-topics.sh --describe --zookeeper zk01:2181 --topi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kafka 重置topic">
+<meta property="og:url" content="http://yoursite.com/2017/12/14/kafka_reset_topic/index.html">
+<meta property="og:site_name" content="追寻事">
+<meta property="og:description" content="删除topic/opt/kafka/bin/kafka-topics.sh --delete --zookeeper zk01:2181 --topic monitoring 停止kafka进程/opt/kafka/bin/stop.sh 清理kafka的数据/opt/kafka/bin/kafka-topics.sh --describe --zookeeper zk01:2181 --topi">
+<meta property="og:updated_time" content="2017-12-13T01:17:49.777Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kafka 重置topic">
+<meta name="twitter:description" content="删除topic/opt/kafka/bin/kafka-topics.sh --delete --zookeeper zk01:2181 --topic monitoring 停止kafka进程/opt/kafka/bin/stop.sh 清理kafka的数据/opt/kafka/bin/kafka-topics.sh --describe --zookeeper zk01:2181 --topi">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/14/kafka_reset_topic/"/>
+
+
+
+
+
+  <title>Kafka 重置topic | 追寻事</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">追寻事</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/14/kafka_reset_topic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ted1769">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="追寻事">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Kafka 重置topic</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-14T11:33:19+08:00">
+                2017-12-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="删除topic"><a href="#删除topic" class="headerlink" title="删除topic"></a>删除topic</h4><p><code>/opt/kafka/bin/kafka-topics.sh --delete --zookeeper zk01:2181 --topic monitoring</code></p>
+<h4 id="停止kafka进程"><a href="#停止kafka进程" class="headerlink" title="停止kafka进程"></a>停止kafka进程</h4><p><code>/opt/kafka/bin/stop.sh</code></p>
+<h4 id="清理kafka的数据"><a href="#清理kafka的数据" class="headerlink" title="清理kafka的数据"></a>清理kafka的数据</h4><p><code>/opt/kafka/bin/kafka-topics.sh --describe --zookeeper zk01:2181 --topic monitoring</code><br>  删除kafka日志<br><code>rm -rf /opt/kafka-logs/monitoring-*</code></p>
+<h4 id="删除zk-里面的topic-信息"><a href="#删除zk-里面的topic-信息" class="headerlink" title="删除zk 里面的topic 信息"></a>删除zk 里面的topic 信息</h4><p>habase zkcli登录zk 客户端:<br><code>ls /brokers/topics/monitoring</code><br><code>get /brokers/topics/monitoring/partitions</code><br><code>rmr /brokers/topics/monitoring</code></p>
+<h4 id="重启zk，清除topic的缓存数据"><a href="#重启zk，清除topic的缓存数据" class="headerlink" title="重启zk，清除topic的缓存数据"></a>重启zk，清除topic的缓存数据</h4><h4 id="启动kafka"><a href="#启动kafka" class="headerlink" title="启动kafka"></a>启动kafka</h4><p><code>nohup /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties &amp;</code></p>
+<h4 id="创建topic"><a href="#创建topic" class="headerlink" title="创建topic"></a>创建topic</h4><p><code>/opt/kafka/bin/kafka-topics.sh --create --zookeeper zk01:2181 --replication-factor 3 --partitions 10 --topic monitoring</code></p>
+<h4 id="查看topic信息"><a href="#查看topic信息" class="headerlink" title="查看topic信息"></a>查看topic信息</h4><p><code>/opt/kafka/bin/kafka-topics.sh --describe --zookeeper zk01:2181 --topic monitoring</code></p>
+<h4 id="查看是否采集到数据信息"><a href="#查看是否采集到数据信息" class="headerlink" title="查看是否采集到数据信息"></a>查看是否采集到数据信息</h4><p><code>/opt/kafka/bin/kafka-console-consumer.sh --zookeeper zk01:2181 --topic monitoring</code></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/14/kafka_config/" rel="next" title="Kafka 主要配置参数概览">
+                <i class="fa fa-chevron-left"></i> Kafka 主要配置参数概览
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/14/linux_filesystem_ops/" rel="prev" title="Linux磁盘操作">
+                Linux磁盘操作 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">ted1769</p>
+              <p class="site-description motion-element" itemprop="description">一个博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#删除topic"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x5220;&#x9664;topic" class="headerlink" title="&#x5220;&#x9664;topic"></a>&#x5220;&#x9664;topic</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#停止kafka进程"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x505C;&#x6B62;kafka&#x8FDB;&#x7A0B;" class="headerlink" title="&#x505C;&#x6B62;kafka&#x8FDB;&#x7A0B;"></a>&#x505C;&#x6B62;kafka&#x8FDB;&#x7A0B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#清理kafka的数据"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x6E05;&#x7406;kafka&#x7684;&#x6570;&#x636E;" class="headerlink" title="&#x6E05;&#x7406;kafka&#x7684;&#x6570;&#x636E;"></a>&#x6E05;&#x7406;kafka&#x7684;&#x6570;&#x636E;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除zk-里面的topic-信息"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x5220;&#x9664;zk-&#x91CC;&#x9762;&#x7684;topic-&#x4FE1;&#x606F;" class="headerlink" title="&#x5220;&#x9664;zk &#x91CC;&#x9762;&#x7684;topic &#x4FE1;&#x606F;"></a>&#x5220;&#x9664;zk &#x91CC;&#x9762;&#x7684;topic &#x4FE1;&#x606F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重启zk，清除topic的缓存数据"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x91CD;&#x542F;zk&#xFF0C;&#x6E05;&#x9664;topic&#x7684;&#x7F13;&#x5B58;&#x6570;&#x636E;" class="headerlink" title="&#x91CD;&#x542F;zk&#xFF0C;&#x6E05;&#x9664;topic&#x7684;&#x7F13;&#x5B58;&#x6570;&#x636E;"></a>&#x91CD;&#x542F;zk&#xFF0C;&#x6E05;&#x9664;topic&#x7684;&#x7F13;&#x5B58;&#x6570;&#x636E;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动kafka"><span class="nav-number">6.</span> <span class="nav-text"><a href="#&#x542F;&#x52A8;kafka" class="headerlink" title="&#x542F;&#x52A8;kafka"></a>&#x542F;&#x52A8;kafka</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建topic"><span class="nav-number">7.</span> <span class="nav-text"><a href="#&#x521B;&#x5EFA;topic" class="headerlink" title="&#x521B;&#x5EFA;topic"></a>&#x521B;&#x5EFA;topic</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看topic信息"><span class="nav-number">8.</span> <span class="nav-text"><a href="#&#x67E5;&#x770B;topic&#x4FE1;&#x606F;" class="headerlink" title="&#x67E5;&#x770B;topic&#x4FE1;&#x606F;"></a>&#x67E5;&#x770B;topic&#x4FE1;&#x606F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看是否采集到数据信息"><span class="nav-number">9.</span> <span class="nav-text"><a href="#&#x67E5;&#x770B;&#x662F;&#x5426;&#x91C7;&#x96C6;&#x5230;&#x6570;&#x636E;&#x4FE1;&#x606F;" class="headerlink" title="&#x67E5;&#x770B;&#x662F;&#x5426;&#x91C7;&#x96C6;&#x5230;&#x6570;&#x636E;&#x4FE1;&#x606F;"></a>&#x67E5;&#x770B;&#x662F;&#x5426;&#x91C7;&#x96C6;&#x5230;&#x6570;&#x636E;&#x4FE1;&#x606F;</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ted1769</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

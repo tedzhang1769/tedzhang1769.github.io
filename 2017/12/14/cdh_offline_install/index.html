@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1 前置条件 关闭防火墙 12service iptables stop 　　chkconfig iptables off  vi /etc/selinux/config 文件 1将SELINUX=enforcing改为SELINUX=disabled (需重启)  所有节点 更改host文件  vi /etc/sysconfig/network 1HOSTNAME=r01-hadoop01.co">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CDH5.4.2 离线安装 - rhel6.6">
+<meta property="og:url" content="http://yoursite.com/2017/12/14/cdh_offline_install/index.html">
+<meta property="og:site_name" content="追寻事">
+<meta property="og:description" content="1 前置条件 关闭防火墙 12service iptables stop 　　chkconfig iptables off  vi /etc/selinux/config 文件 1将SELINUX=enforcing改为SELINUX=disabled (需重启)  所有节点 更改host文件  vi /etc/sysconfig/network 1HOSTNAME=r01-hadoop01.co">
+<meta property="og:updated_time" content="2017-12-12T04:47:44.400Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CDH5.4.2 离线安装 - rhel6.6">
+<meta name="twitter:description" content="1 前置条件 关闭防火墙 12service iptables stop 　　chkconfig iptables off  vi /etc/selinux/config 文件 1将SELINUX=enforcing改为SELINUX=disabled (需重启)  所有节点 更改host文件  vi /etc/sysconfig/network 1HOSTNAME=r01-hadoop01.co">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/14/cdh_offline_install/"/>
+
+
+
+
+
+  <title>CDH5.4.2 离线安装 - rhel6.6 | 追寻事</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">追寻事</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/14/cdh_offline_install/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ted1769">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="追寻事">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CDH5.4.2 离线安装 - rhel6.6</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-14T11:33:19+08:00">
+                2017-12-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1-前置条件"><a href="#1-前置条件" class="headerlink" title="1 前置条件"></a>1 前置条件</h3><ul>
+<li><p>关闭防火墙</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service iptables stop </span><br><span class="line">　　chkconfig iptables off</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>vi /etc/selinux/config 文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">将SELINUX=enforcing改为SELINUX=disabled (需重启)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><em>所有节点</em> 更改<code>host</code>文件</p>
+<ol>
+<li><p>vi /etc/sysconfig/network</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HOSTNAME=r01-hadoop01.com</span><br></pre></td></tr></table></figure>
+<p>2.vi /etc/hosts</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">10.137.37.25 r01-hadoop01.com hadoop01</span><br><span class="line">10.137.37.26 r01-hadoop02.com hadoop02</span><br><span class="line">10.137.37.27 r01-hadoop03.com hadoop03</span><br><span class="line">10.137.37.28 r01-hadoop04.com hadoop04</span><br></pre></td></tr></table></figure>
+<p>3 重启网络</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service network restart</span><br></pre></td></tr></table></figure>
+<p>4 重启机器，hostname 重启机器后，才看得到变化</p>
+</li>
+</ol>
+</li>
+<li><p>无密码登录<br>  <em>所有节点</em> <code>ssh-keygen -t rsa</code><br>  <em>主节点</em></p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat .ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</span><br><span class="line">scp ~/.ssh/authorized_keys root@r01-hadoop04.com:~/.ssh/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><em>所有节点</em> 安装<code>java</code><br>  <code>cd /var/www/html/</code></p>
+</li>
+</ul>
+<ol>
+<li>删除系统已有的openjdk 版本 ,否则会出现安装hdfs时 出现”permission denies” 问题</li>
+<li>安装Oracle的Java（所有节点）<br><strong>采用rpm的安装方式，而不要采用tar解压的安装方式</strong>。因为rpm的安装方式，会在/usr/lib下新建两个软连接<br>由于是rpm包并不需要我们来配置环境变量，我们只需要配置一个全局的JAVA_HOME变量即可，执行命令：<br>echo “JAVA_HOME=/usr/java/latest/“ &gt;&gt; /etc/environment<br>执行命令java -version和javac -version，查看Jdk是否安装正确。</li>
+</ol>
+<ul>
+<li><p><em>主节点</em> 配置yum源</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/yum.repos.d</span><br><span class="line">yum -y install httpd</span><br><span class="line">yum -y install createrepo</span><br></pre></td></tr></table></figure>
+<p>  1 配置file源 -&gt; <code>vi local.repo</code>,将rpm放在<code>/media/Packages</code>下，还需要<code>repodata</code>文件夹与<code>Packages</code> 同级目录</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[local]</span><br><span class="line">name=local</span><br><span class="line">baseurl=file:///media</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br></pre></td></tr></table></figure>
+</code></pre><p>  2.配置http源<br>  <code>vi /etc/httpd/conf/httpd.conf</code></p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DocumentRoot &quot;/var/www/html&quot;</span><br></pre></td></tr></table></figure>
+<p>  刚好就用上了1配置好的本地源来安装软件<br>  将 <code>cloudera-manager</code>相关的 rpm 包<a href="http://archive.cloudera.com/cm5/redhat/6/x86_64/cm/5.4.3/RPMS/x86_64/" target="_blank" rel="noopener">下载地址</a>放入到<code>/var/www/html/cloudera-manager</code> 下</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">createrepo /var/www/html</span><br><span class="line">vi cloudera-manager.repo</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[cloudera-manager]</span><br><span class="line">name = Cloudera Manager, Version 5.4.3</span><br><span class="line">baseurl = http://10.137.37.25/cloudera-manager/</span><br><span class="line">gpgcheck = 0</span><br></pre></td></tr></table></figure>
+<p>  为方便多节点部署，将<code>cloudera-manager.repo</code> <code>scp</code>到每个节点的 <code>/etc/yum.repos.d</code>,这样每个节点都能够读取主master repo下的rpms了。</p>
+</li>
+<li><p><em>主节点</em> 安装 mysql<br>  基于前面配置好的yum源，就可以安装软件啦。<br>  <code>yum install mysql-server</code><br>  添加为自启动<code>chkconfig mysqld on</code><br>  启动mysql <code>service mysqld start</code><br>  修改root密码<code>mysqladmin -u root password &#39;123456&#39;</code><br>  进入mysql<code>mysql -uroot -p123456</code><br>  创建数据库</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">create database hive DEFAULT CHARSET utf8 COLLATE utf8_general_ci;</span><br><span class="line">create database amon DEFAULT CHARSET utf8 COLLATE utf8_general_ci;</span><br><span class="line">create database hue default charset utf8 collate utf8_general_ci;</span><br><span class="line">create database navigator_audit_server default charset utf8 collate utf8_general_ci;</span><br><span class="line">create database navigator_metadata_server default charset utf8 collate utf8_general_ci;</span><br><span class="line">create database reports_manager default charset utf8 collate utf8_general_ci;</span><br><span class="line">create database Oozie default charset utf8 collate utf8_general_ci;</span><br></pre></td></tr></table></figure>
+<p>  授权</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grant all privileges on *.* to &apos;root&apos;@&apos;%&apos; identified by &apos;123456&apos; with grant option;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="2-安装-cloudera-manager"><a href="#2-安装-cloudera-manager" class="headerlink" title="2 安装 cloudera manager"></a>2 安装 cloudera manager</h3><ul>
+<li><p>所有节点创建cloudera-scm用户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd --system --home=/opt/cm-5.4.3/run/cloudera-scm-server/ --no-create-home --shell=/bin/false --comment &quot;Cloudera SCM User&quot; cloudera-scm</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><em>主节点</em> 安装置Cloudera Manager Server 和AgentServer（主节点）</p>
+<ol>
+<li>下载地址：<a href="http://archive-primary.cloudera.com/cm5/cm/5/" target="_blank" rel="noopener">http://archive-primary.cloudera.com/cm5/cm/5/</a><br>我选的是cloudera-manager-el6-cm5.4.3_x86_64.tar.gz，完成后上传到主节点<br>然后解压到/opt目录下，不能解压到其它地方</li>
+<li>加mysql-java 驱动<br><code>cp mysql-connector-java-5.1.36-bin.jar /opt/cm-5.4.3/share/cmf/lib/</code></li>
+<li>将parcel 放入 1·<code>/opt/cloudera/parcel-repo/</code></li>
+</ol>
+</li>
+</ul>
+<ol>
+<li>创建cm数据库<br><code>/opt/cm-5.4.3/share/cmf/schema/scm_prepare_database.sh mysql cm -hlocalhost -uroot -p123456 --scm-host localhost scm scm scm</code></li>
+<li>开启Cloudera Manager 5 Server端<br><code>/opt/cm-5.4.3/etc/init.d/cloudera-scm-server start</code></li>
+</ol>
+<ul>
+<li><p><em>所有节点</em> Agent配置<br>[注意]主节点如果也需要启动hdfs yarn等服务的话是需要同时启动server和agent的<br>1.主节点修改/opt/cm-5.4.3/etc/cloudera-scm-agent/config.ini下面的serer_host为主节点的主机名<br><code>vi /opt/cm-5.4.3/etc/cloudera-scm-agent/config.ini</code><br><code>server_host=x.x.x.x</code></p>
+<ol>
+<li>复制/opt/cm-5.4.3到所有slave节点上<br><code>scp -r /opt/cm-5.4.3 root@r01-hadoop04.com:/opt/</code></li>
+<li>等待拷贝成功，在所有节点上启动Agent：（注意必须以管理员权限启动）<br><code>/opt/cm-5.4.3/etc/init.d/cloudera-scm-agent start</code></li>
+</ol>
+</li>
+</ul>
+<ol>
+<li>浏览器启动Cloudera Manager 5 控制台（默认端口号是7180），启动成功就会看到登陆页面<br><code>http://10.60.28.1/cloudera-manager</code></li>
+</ol>
+<h3 id="3-安装-CDH"><a href="#3-安装-CDH" class="headerlink" title="3 安装 CDH"></a>3 安装 CDH</h3><p><em>Select Repository</em> 中选择  <strong>Custom Repository</strong>,然后填入<br>repo地址</p>
+<p><strong>遇到的问题</strong></p>
+<ol>
+<li><p>对于此 Cloudera Manager 版本 (5.4.3) 太新的 CDH 版本不会显示<br>问题描述：Versions of CDH that are too new for this version of Cloudera Manager (5.4.3) will not be shown.<br>问题定位：PARCELS表没有记录，判断为parcel文件问题或scm数据库生成干扰问题<br>解决思路：<strong>判断为/opt/cloudera/parcel-repo/目录内的本地parcel应该在cm数据库初始化前放入，cm这样初始化时就能读取parcel-repo的数据啦</strong><br>问题解决：停止server-&gt;删除cm数据库-&gt;复制parcel到/opt/cloudera/parcel-repo/-&gt;创建cm数据库&gt;启动server&gt;</p>
+</li>
+<li><p>在安装Hive时，connection测试，需要密码，</p>
+</li>
+<li>在安装Oozie时，connection测试，不需要密码</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/14/bash_script-1/" rel="next" title="bash 脚本笔记">
+                <i class="fa fa-chevron-left"></i> bash 脚本笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/14/cdh_optimizer/" rel="prev" title="CDH 调优">
+                CDH 调优 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">ted1769</p>
+              <p class="site-description motion-element" itemprop="description">一个博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-前置条件"><span class="nav-number">1.</span> <span class="nav-text"><a href="#1-&#x524D;&#x7F6E;&#x6761;&#x4EF6;" class="headerlink" title="1 &#x524D;&#x7F6E;&#x6761;&#x4EF6;"></a>1 &#x524D;&#x7F6E;&#x6761;&#x4EF6;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安装-cloudera-manager"><span class="nav-number">2.</span> <span class="nav-text"><a href="#2-&#x5B89;&#x88C5;-cloudera-manager" class="headerlink" title="2 &#x5B89;&#x88C5; cloudera manager"></a>2 &#x5B89;&#x88C5; cloudera manager</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-安装-CDH"><span class="nav-number">3.</span> <span class="nav-text"><a href="#3-&#x5B89;&#x88C5;-CDH" class="headerlink" title="3 &#x5B89;&#x88C5; CDH"></a>3 &#x5B89;&#x88C5; CDH</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ted1769</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

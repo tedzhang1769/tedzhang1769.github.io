@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="namespace 的 6项隔离   namespace 系统调用参数 隔离内容     UTS CLONE_NEWUTS 主机名和域名   IPC CLONE_NEWIPC 信号量、消息队列和共享内存   PID CLONE_NEWPID 进程ID   Network CLONE_NEWNET 网络设备、端口、网络栈等   Mount CLONE_NEWNS 文件系统   User CLONE_">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker 命令">
+<meta property="og:url" content="http://yoursite.com/2017/12/14/docker_command/index.html">
+<meta property="og:site_name" content="追寻事">
+<meta property="og:description" content="namespace 的 6项隔离   namespace 系统调用参数 隔离内容     UTS CLONE_NEWUTS 主机名和域名   IPC CLONE_NEWIPC 信号量、消息队列和共享内存   PID CLONE_NEWPID 进程ID   Network CLONE_NEWNET 网络设备、端口、网络栈等   Mount CLONE_NEWNS 文件系统   User CLONE_">
+<meta property="og:updated_time" content="2017-12-12T07:51:21.574Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker 命令">
+<meta name="twitter:description" content="namespace 的 6项隔离   namespace 系统调用参数 隔离内容     UTS CLONE_NEWUTS 主机名和域名   IPC CLONE_NEWIPC 信号量、消息队列和共享内存   PID CLONE_NEWPID 进程ID   Network CLONE_NEWNET 网络设备、端口、网络栈等   Mount CLONE_NEWNS 文件系统   User CLONE_">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/14/docker_command/"/>
+
+
+
+
+
+  <title>Docker 命令 | 追寻事</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">追寻事</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/14/docker_command/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ted1769">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="追寻事">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Docker 命令</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-14T11:33:19+08:00">
+                2017-12-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="namespace-的-6项隔离"><a href="#namespace-的-6项隔离" class="headerlink" title="namespace 的 6项隔离"></a>namespace 的 6项隔离</h3><table>
+<thead>
+<tr>
+<th>namespace</th>
+<th style="text-align:center">系统调用参数</th>
+<th style="text-align:right">隔离内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UTS</td>
+<td style="text-align:center">CLONE_NEWUTS</td>
+<td style="text-align:right">主机名和域名</td>
+</tr>
+<tr>
+<td>IPC</td>
+<td style="text-align:center">CLONE_NEWIPC</td>
+<td style="text-align:right">信号量、消息队列和共享内存</td>
+</tr>
+<tr>
+<td>PID</td>
+<td style="text-align:center">CLONE_NEWPID</td>
+<td style="text-align:right">进程ID</td>
+</tr>
+<tr>
+<td>Network</td>
+<td style="text-align:center">CLONE_NEWNET</td>
+<td style="text-align:right">网络设备、端口、网络栈等</td>
+</tr>
+<tr>
+<td>Mount</td>
+<td style="text-align:center">CLONE_NEWNS</td>
+<td style="text-align:right">文件系统</td>
+</tr>
+<tr>
+<td>User</td>
+<td style="text-align:center">CLONE_NEWUSER</td>
+<td style="text-align:right">用户和用户组</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Docker-子命令，示例图-及-说明"><a href="#Docker-子命令，示例图-及-说明" class="headerlink" title="Docker 子命令，示例图 及 说明"></a>Docker 子命令，<a href="https://segmentfault.com/img/bVdlRG" target="_blank" rel="noopener">示例图</a> 及 <a href="https://segmentfault.com/a/1190000000751601" target="_blank" rel="noopener">说明</a></h3><p><strong><em> ctrl+d 退出容器且关闭, docker ps 查看无 </em></strong><br><strong><em> ctrl+p+q 退出容器但不关闭, docker ps 查看有 </em></strong></p>
+<blockquote>
+<p>Docker环境信息：<code>info</code>,<code>version</code></p>
+<p>容器生命周期管理：<code>create</code>,<code>exec</code>,<code>kill</code>,<code>pause</code>,<code>restart</code>,<code>rm</code>,<code>run</code>,<code>start</code>,<code>stop</code>,<code>unpause</code>,<code>,</code>,<code>,</code>,``</p>
+<p>镜像仓库命令：<code>login</code>,<code>logout</code>,<code>pull</code>,<code>push</code>,<code>search</code></p>
+<p>镜像管理:<code>build</code> –&gt;根据Dockerfile 生成 image<br>        <code>commit</code>,<code>rmi</code>,<code>load</code>,<code>save</code>,<code>tag</code></p>
+<p>容器运维操作：<code>attach</code>,<code>import</code>,<code>export</code>,<code>rename</code>,<code>wait</code>,<code>cp</code>,<code>diff</code>,<code>update</code>,</p>
+<p>容器监控命令：<br><code>ps</code>：容器信息<br><code>top</code>：容器信息<br><code>images</code>：镜像信息<br><code>inspect</code>:ron<br><code>stats</code>：只有在选用 <code>libcontainer</code> 作为driver才能使用<br><code>port</code>：查看容器与主机之前的端口映射关系信息</p>
+<p>容器资源管理：<code>volume</code>,<code>network</code></p>
+<p>系统日志信息：<code>events</code>,<code>history</code>,<code>logs</code></p>
+</blockquote>
+<h3 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h3><blockquote>
+<p>指令：<strong>第一条指令必须是FROM指令，提供基础镜像</strong><br>    <code>FROM</code>：image 或者 image:tag<br>    <code>ENV</code>: key value 或者 key = value :环境变量<br>    <code>COPY</code>: src dest :复制src的文件添加到新镜像中。<br>    <code>ADD</code>： src dest：与COPY类似，推荐COPY,因为COPY只支持本地文件，相对ADD更透明<br>    <code>RUN</code>:command :shell格式<br>          “executable”，”param1”,”param2”:exec格式，推荐。不调用shell,参数会当成JSON数组被Docker解析，必须使用双引号，<br>    在镜像的基础上创建一个容器，并在容器中运行命令。命令结束后提交容器为新镜像，为吓一跳指令使用。<br>    <code>CMD</code>:command:shell 格式<br>          “executable”，”param1”,”param2”:exec格式，推荐<br>          “param1”,”param2”：为<code>ENTRYPOINT</code>指令提供参数<br>1 一个Dockerfile可以有多个CMD指令，但只有最有一条有效。<br>2 使用<em>shell</em>和<em>exec</em>格式时，命令与<code>RUN</code>相同。区别：<code>RUN</code>在构建镜像时执行命令，并生成新的镜像；<code>CMD</code>在构建镜像是不执行命令，而是在容器启动时默认将<code>CMD</code>指令作为第一条执行的命令。若用户在命令行界面<code>docker run</code>指令了命令参数，会覆盖<code>CMD</code>的命令</p>
+</blockquote>
+<pre><code>`ENTRYPOINT`：command:shell 格式
+      &quot;executable&quot;，&quot;param1&quot;,&quot;param2&quot;:exec格式，推荐
+      命令与`CMD`类似，都可以在容器启动时执行命令。
+      一个Dockerfile可以有多个`ENTRYPOINT`指令，但只有最有一条有效.
+</code></pre><h3 id="Dockerfile-实践心得"><a href="#Dockerfile-实践心得" class="headerlink" title="Dockerfile 实践心得"></a>Dockerfile 实践心得</h3><ul>
+<li>使用标签（x.y 而不是 :latest）</li>
+<li>构建Docker镜像时，只安装和更新要用的包。更推荐使用轻量级的包，大小比较：busybox &lt; debian &lt; centos &lt; ubuntu</li>
+<li><code>FROM</code> 应该包含tag，如 FROM <code>debian:jessie</code> 而不是 <code>FROM debian</code></li>
+<li>Docker daemon 会顺序执行Dockerfile中的指令，而一旦缓存失效，后续命令不能使用缓存。为有效利用缓存，需保证指令的连续性，尽量将Dockerfile中相同的部分放前面，不同的放后面</li>
+<li><p>正确使用<code>ADD</code> 与 <code>COPY</code></p>
+<ul>
+<li>优先使用 <code>COPY</code>.</li>
+<li>不推荐使用<code>ADD</code>去获取远程URL的压缩包，应该使用<code>RUN wget</code>或者 <code>RUN curl</code>.这样可以删除解压后不要需要的文件。</li>
+</ul>
+</li>
+<li><p><code>RUN</code> 不要讲所有命令写在一个<code>RUN</code> 指令里。</p>
+<ul>
+<li>不要在一行中单独使用<code>RUN apt-get update</code>,容易引起缓存问题,导致<code>RUN apt-get install</code> 运行失败。应该将<code>RUN apt-get update</code> 和 <code>RUN apt-get install -y  package...</code> 放在一行</li>
+<li>避免使用指令<code>RUN apt-get update</code> 和 <code>RUN apt-get dist-update</code></li>
+</ul>
+</li>
+<li>不要在Dockerfile 中做端口映射<br>  不要 <code>EXPOSE 80:8080</code>，仅暴露端口<code>EXPOSE 80</code>,另做映射</li>
+<li>使用Dockerfile 共享 Docker 镜像<ul>
+<li>Dockerfile 可以 加入版本控制，追踪变化和回滚错误</li>
+<li>可以清楚镜像构建的过程</li>
+<li>具有确定性</li>
+<li>少占地方</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/14/compiler_pricinpel/" rel="next" title="编译原理基础">
+                <i class="fa fa-chevron-left"></i> 编译原理基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/14/docker_guide-1/" rel="prev" title="docker guide (1)">
+                docker guide (1) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">ted1769</p>
+              <p class="site-description motion-element" itemprop="description">一个博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#namespace-的-6项隔离"><span class="nav-number">1.</span> <span class="nav-text"><a href="#namespace-&#x7684;-6&#x9879;&#x9694;&#x79BB;" class="headerlink" title="namespace &#x7684; 6&#x9879;&#x9694;&#x79BB;"></a>namespace &#x7684; 6&#x9879;&#x9694;&#x79BB;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-子命令，示例图-及-说明"><span class="nav-number">2.</span> <span class="nav-text"><a href="#Docker-&#x5B50;&#x547D;&#x4EE4;&#xFF0C;&#x793A;&#x4F8B;&#x56FE;-&#x53CA;-&#x8BF4;&#x660E;" class="headerlink" title="Docker &#x5B50;&#x547D;&#x4EE4;&#xFF0C;&#x793A;&#x4F8B;&#x56FE; &#x53CA; &#x8BF4;&#x660E;"></a>Docker &#x5B50;&#x547D;&#x4EE4;&#xFF0C;<a href="https://segmentfault.com/img/bVdlRG" target="_blank" rel="noopener">&#x793A;&#x4F8B;&#x56FE;</a> &#x53CA; <a href="https://segmentfault.com/a/1190000000751601" target="_blank" rel="noopener">&#x8BF4;&#x660E;</a></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dockerfile"><span class="nav-number">3.</span> <span class="nav-text"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dockerfile-实践心得"><span class="nav-number">4.</span> <span class="nav-text"><a href="#Dockerfile-&#x5B9E;&#x8DF5;&#x5FC3;&#x5F97;" class="headerlink" title="Dockerfile &#x5B9E;&#x8DF5;&#x5FC3;&#x5F97;"></a>Dockerfile &#x5B9E;&#x8DF5;&#x5FC3;&#x5F97;</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ted1769</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

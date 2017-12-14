@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="R在安装R之前需要安装的插件，否则报错yum install -y gcc gcc-devel gcc-gfortran gcc-c++ readline-devel libXt-devel texinfo texlive libpng libpng-devel libtiff libtiff-devel libjpeg-turbo libjpeg-turbo-devel查看是否有相应的包yum">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS 6.5 安装R 和 RStudio 以及 SparkR">
+<meta property="og:url" content="http://yoursite.com/2017/12/14/centos_r_sparkr/index.html">
+<meta property="og:site_name" content="追寻事">
+<meta property="og:description" content="R在安装R之前需要安装的插件，否则报错yum install -y gcc gcc-devel gcc-gfortran gcc-c++ readline-devel libXt-devel texinfo texlive libpng libpng-devel libtiff libtiff-devel libjpeg-turbo libjpeg-turbo-devel查看是否有相应的包yum">
+<meta property="og:updated_time" content="2017-12-12T05:24:55.904Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CentOS 6.5 安装R 和 RStudio 以及 SparkR">
+<meta name="twitter:description" content="R在安装R之前需要安装的插件，否则报错yum install -y gcc gcc-devel gcc-gfortran gcc-c++ readline-devel libXt-devel texinfo texlive libpng libpng-devel libtiff libtiff-devel libjpeg-turbo libjpeg-turbo-devel查看是否有相应的包yum">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/14/centos_r_sparkr/"/>
+
+
+
+
+
+  <title>CentOS 6.5 安装R 和 RStudio 以及 SparkR | 追寻事</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">追寻事</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/14/centos_r_sparkr/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ted1769">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="追寻事">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CentOS 6.5 安装R 和 RStudio 以及 SparkR</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-14T11:33:19+08:00">
+                2017-12-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="R"><a href="#R" class="headerlink" title="R"></a>R</h2><h3 id="在安装R之前需要安装的插件，否则报错"><a href="#在安装R之前需要安装的插件，否则报错" class="headerlink" title="在安装R之前需要安装的插件，否则报错"></a>在安装R之前需要安装的插件，否则报错</h3><p><code>yum install -y gcc gcc-devel gcc-gfortran gcc-c++ readline-devel libXt-devel texinfo texlive libpng libpng-devel libtiff libtiff-devel libjpeg-turbo libjpeg-turbo-devel</code><br>查看是否有相应的包<br><code>yum search gcc-devel</code></p>
+<h3 id="源码安装R"><a href="#源码安装R" class="headerlink" title="源码安装R"></a>源码安装R</h3><p><code>mkdir /usr/local/R</code><br><code>tar -zxvf R-3.2.2.tar.gz</code><br><code>cd R-3.2.2</code><br><code>./configure --enable-R-shlib --with-libpng --with-jpeglib --with-libtiff --with-x</code> //enable-R-shlib 支持RStudio<br><code>make clean</code><br><code>make</code><br><code>make install</code><br>    遇到的问题：1、无法安装pdf</p>
+<pre><code>/usr/bin/install: 无法获取&quot;NEWS.pdf&quot; 的文件状态(stat):     没有那个文件或目录
+/usr/bin/install: 无法获取&quot;NEWS.pdf&quot; 的文件状态(stat):     没有那个文件或目录
+=&gt; 
+</code></pre><p>进入R，检查安装是否成功</p>
+<p><code>R</code><br><code>capabilities()</code> // 看是否支持相应的图形化界面<br>装完R之后，还要安装rJava<br><code>R CMD INSTALL rJava_0.9-7.tar.gz</code><br><code>R CMD INSTALL rhdfs_1.0.8.tar.gz</code><br><code>R CMD INSTALL Rserve_1.7-2.tar.gz</code><br><code>R CMD INSTALL RHive_2.0-0.2.tar.gz</code></p>
+<h2 id="RStudio"><a href="#RStudio" class="headerlink" title="RStudio"></a>RStudio</h2><h3 id="安装-RStudio"><a href="#安装-RStudio" class="headerlink" title="安装 RStudio"></a>安装 RStudio</h3><p><code>wget https://download2.rstudio.org/rstudio-server-rhel-0.99.473-x86_64.rpm</code><br><code>sudo yum install --nogpgcheck rstudio-server-rhel-0.99.473-x86_64.rpm</code></p>
+<h3 id="检查是否安装成功"><a href="#检查是否安装成功" class="headerlink" title="检查是否安装成功"></a>检查是否安装成功</h3><p><code>rstudio-server verify-installation</code><br>如果R <code>./configure</code>没有加 <code>--enable-R-shlib</code>,此命令就会报错。</p>
+<h3 id="使用浏览器访问rstudio-server"><a href="#使用浏览器访问rstudio-server" class="headerlink" title="使用浏览器访问rstudio-server"></a>使用浏览器访问rstudio-server</h3><p><code>http://x.x.x.x:8787</code></p>
+<h3 id="增加权限用户"><a href="#增加权限用户" class="headerlink" title="增加权限用户"></a>增加权限用户</h3><p>在 <code>vi /etc/rstudio/rserver.conf</code>加入一行<code>auth-required-user-group=rstudio_users</code><br>在终端新增用户组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">groupadd rstudio_users </span><br><span class="line">useradd r_user </span><br><span class="line">usermod -a -G rstudio_users r_user </span><br><span class="line">passwd r_user</span><br></pre></td></tr></table></figure>
+<p>如此，r_user 就能访问rstudio-server 服务器啦。</p>
+<h2 id="SparkR"><a href="#SparkR" class="headerlink" title="SparkR"></a>SparkR</h2><h3 id="spark-env-sh-的配置"><a href="#spark-env-sh-的配置" class="headerlink" title="spark-env.sh 的配置"></a>spark-env.sh 的配置</h3><p>在<code>{SPARK_HOME}/conf/spark-env.sh</code> 中加入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> SPARK_DIST_CLASSPATH=<span class="variable">$&#123;HADOOP_HOME&#125;</span>/bin/hadoop</span><br><span class="line"><span class="built_in">export</span> HADOOP_CONF_DIR=/etc/hive/conf</span><br></pre></td></tr></table></figure>
+<h3 id="etc-profile-的配置"><a href="#etc-profile-的配置" class="headerlink" title="/etc/profile 的配置"></a>/etc/profile 的配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/java/jdk1.7.0_67-cloudera</span><br><span class="line">export CLASSPATH=$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$CLASSPATH</span><br><span class="line">export HADOOP_HOME=/opt/cloudera/parcels/CDH/lib/hadoop</span><br><span class="line">export HADOOP_CONF_DIR=/etc/hadoop/conf</span><br><span class="line">export HADOOP_CMD=$HADOOP_HOME/bin/hadoop</span><br><span class="line">export SPARK_DIST_CLASSPATH=$(hadoop --config /etc/hadoop/conf/ classpath)</span><br></pre></td></tr></table></figure>
+<p>以下这些不是必须：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export HADOOP_COMMON_HOME=/opt/cloudera/parcels/CDH-5.4.2-1.cdh5.4.2.p0.2/lib/hadoop/libexec/../../hadoop</span><br><span class="line">export HADOOP_HDFS_HOME=/opt/cloudera/parcels/CDH-5.4.2-1.cdh5.4.2.p0.2/lib/hadoop/libexec/../../hadoop-hdfs</span><br><span class="line">export HADOOP_MAPRED_HOME=/opt/cloudera/parcels/CDH-5.4.2-1.cdh5.4.2.p0.2/lib/hadoop/libexec/../../hadoop-mapreduce</span><br><span class="line">export HADOOP_YARN_HOME=/opt/cloudera/parcels/CDH-5.4.2-1.cdh5.4.2.p0.2/lib/hadoop/libexec/../../hadoop-yarn</span><br></pre></td></tr></table></figure>
+<h3 id="在R命令行中加入sparkR需要的包"><a href="#在R命令行中加入sparkR需要的包" class="headerlink" title="在R命令行中加入sparkR需要的包"></a>在R命令行中加入sparkR需要的包</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Sys.setenv(JAVA_HOME=<span class="string">"/usr/java/jdk1.7.0_67-cloudera"</span>)</span><br><span class="line">Sys.setenv(HADOOP_CMD=<span class="string">"/opt/cloudera/parcels/CDH/lib/hadoop/bin/hadoop"</span>)</span><br><span class="line">Sys.setenv(SPARK_HOME =<span class="string">"/home/loguser/spark-1.6.1-bin-hadoop2.6"</span> )</span><br><span class="line">.libPaths(c(file.path(Sys.getenv(<span class="string">"SPARK_HOME"</span>), <span class="string">"R"</span>, <span class="string">"lib"</span>), .libPaths()))</span><br><span class="line"><span class="keyword">library</span>(<span class="string">"rJava"</span>)</span><br><span class="line"><span class="keyword">library</span>(<span class="string">"rhdfs"</span>)</span><br><span class="line"><span class="keyword">library</span>(<span class="string">"RHive"</span>)</span><br><span class="line"><span class="keyword">library</span>(SparkR)</span><br><span class="line">sc=sparkR.init(sparkHome = <span class="string">"/home/loguser/spark-1.6.1-bin-hadoop2.6"</span>)</span><br><span class="line">hiveContext=sparkRHive.init(sc)</span><br></pre></td></tr></table></figure>
+<p>真正的查询：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">results &lt;- sql(hiveContext,<span class="string">"select account_ from xxx.xxxx where date_ = '20160502' limit 10"</span>)</span><br><span class="line">head(results)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/14/cdh_optimizer/" rel="next" title="CDH 调优">
+                <i class="fa fa-chevron-left"></i> CDH 调优
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/14/centos7.3_smokeping/" rel="prev" title="centos7.3 安装 smokeping">
+                centos7.3 安装 smokeping <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">ted1769</p>
+              <p class="site-description motion-element" itemprop="description">一个博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#R"><span class="nav-number">1.</span> <span class="nav-text"><a href="#R" class="headerlink" title="R"></a>R</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在安装R之前需要安装的插件，否则报错"><span class="nav-number">1.1.</span> <span class="nav-text"><a href="#&#x5728;&#x5B89;&#x88C5;R&#x4E4B;&#x524D;&#x9700;&#x8981;&#x5B89;&#x88C5;&#x7684;&#x63D2;&#x4EF6;&#xFF0C;&#x5426;&#x5219;&#x62A5;&#x9519;" class="headerlink" title="&#x5728;&#x5B89;&#x88C5;R&#x4E4B;&#x524D;&#x9700;&#x8981;&#x5B89;&#x88C5;&#x7684;&#x63D2;&#x4EF6;&#xFF0C;&#x5426;&#x5219;&#x62A5;&#x9519;"></a>&#x5728;&#x5B89;&#x88C5;R&#x4E4B;&#x524D;&#x9700;&#x8981;&#x5B89;&#x88C5;&#x7684;&#x63D2;&#x4EF6;&#xFF0C;&#x5426;&#x5219;&#x62A5;&#x9519;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源码安装R"><span class="nav-number">1.2.</span> <span class="nav-text"><a href="#&#x6E90;&#x7801;&#x5B89;&#x88C5;R" class="headerlink" title="&#x6E90;&#x7801;&#x5B89;&#x88C5;R"></a>&#x6E90;&#x7801;&#x5B89;&#x88C5;R</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RStudio"><span class="nav-number">2.</span> <span class="nav-text"><a href="#RStudio" class="headerlink" title="RStudio"></a>RStudio</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-RStudio"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#x5B89;&#x88C5;-RStudio" class="headerlink" title="&#x5B89;&#x88C5; RStudio"></a>&#x5B89;&#x88C5; RStudio</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查是否安装成功"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#&#x68C0;&#x67E5;&#x662F;&#x5426;&#x5B89;&#x88C5;&#x6210;&#x529F;" class="headerlink" title="&#x68C0;&#x67E5;&#x662F;&#x5426;&#x5B89;&#x88C5;&#x6210;&#x529F;"></a>&#x68C0;&#x67E5;&#x662F;&#x5426;&#x5B89;&#x88C5;&#x6210;&#x529F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用浏览器访问rstudio-server"><span class="nav-number">2.3.</span> <span class="nav-text"><a href="#&#x4F7F;&#x7528;&#x6D4F;&#x89C8;&#x5668;&#x8BBF;&#x95EE;rstudio-server" class="headerlink" title="&#x4F7F;&#x7528;&#x6D4F;&#x89C8;&#x5668;&#x8BBF;&#x95EE;rstudio-server"></a>&#x4F7F;&#x7528;&#x6D4F;&#x89C8;&#x5668;&#x8BBF;&#x95EE;rstudio-server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增加权限用户"><span class="nav-number">2.4.</span> <span class="nav-text"><a href="#&#x589E;&#x52A0;&#x6743;&#x9650;&#x7528;&#x6237;" class="headerlink" title="&#x589E;&#x52A0;&#x6743;&#x9650;&#x7528;&#x6237;"></a>&#x589E;&#x52A0;&#x6743;&#x9650;&#x7528;&#x6237;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SparkR"><span class="nav-number">3.</span> <span class="nav-text"><a href="#SparkR" class="headerlink" title="SparkR"></a>SparkR</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#spark-env-sh-的配置"><span class="nav-number">3.1.</span> <span class="nav-text"><a href="#spark-env-sh-&#x7684;&#x914D;&#x7F6E;" class="headerlink" title="spark-env.sh &#x7684;&#x914D;&#x7F6E;"></a>spark-env.sh &#x7684;&#x914D;&#x7F6E;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#etc-profile-的配置"><span class="nav-number">3.2.</span> <span class="nav-text"><a href="#etc-profile-&#x7684;&#x914D;&#x7F6E;" class="headerlink" title="/etc/profile &#x7684;&#x914D;&#x7F6E;"></a>/etc/profile &#x7684;&#x914D;&#x7F6E;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在R命令行中加入sparkR需要的包"><span class="nav-number">3.3.</span> <span class="nav-text"><a href="#&#x5728;R&#x547D;&#x4EE4;&#x884C;&#x4E2D;&#x52A0;&#x5165;sparkR&#x9700;&#x8981;&#x7684;&#x5305;" class="headerlink" title="&#x5728;R&#x547D;&#x4EE4;&#x884C;&#x4E2D;&#x52A0;&#x5165;sparkR&#x9700;&#x8981;&#x7684;&#x5305;"></a>&#x5728;R&#x547D;&#x4EE4;&#x884C;&#x4E2D;&#x52A0;&#x5165;sparkR&#x9700;&#x8981;&#x7684;&#x5305;</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ted1769</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

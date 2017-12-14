@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="bash变量1） 本地变量 name=value 读取变量 $name 作用域整个bash进程这里省略了 set, set name=value，撤销变量 unset name,不加$(针对变量本身不加$,如果针对变量的值就需要$)  2） 局部变量 LOCAL name= value 作用域为当前代码段  3） 环境变量 作用域为当前shell进程及其子进程  脚本在执行时会启动一个子shell">
+<meta property="og:type" content="article">
+<meta property="og:title" content="bash 脚本笔记">
+<meta property="og:url" content="http://yoursite.com/2017/12/14/bash_script-1/index.html">
+<meta property="og:site_name" content="追寻事">
+<meta property="og:description" content="bash变量1） 本地变量 name=value 读取变量 $name 作用域整个bash进程这里省略了 set, set name=value，撤销变量 unset name,不加$(针对变量本身不加$,如果针对变量的值就需要$)  2） 局部变量 LOCAL name= value 作用域为当前代码段  3） 环境变量 作用域为当前shell进程及其子进程  脚本在执行时会启动一个子shell">
+<meta property="og:updated_time" content="2017-12-12T07:34:07.640Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="bash 脚本笔记">
+<meta name="twitter:description" content="bash变量1） 本地变量 name=value 读取变量 $name 作用域整个bash进程这里省略了 set, set name=value，撤销变量 unset name,不加$(针对变量本身不加$,如果针对变量的值就需要$)  2） 局部变量 LOCAL name= value 作用域为当前代码段  3） 环境变量 作用域为当前shell进程及其子进程  脚本在执行时会启动一个子shell">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/14/bash_script-1/"/>
+
+
+
+
+
+  <title>bash 脚本笔记 | 追寻事</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">追寻事</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/14/bash_script-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ted1769">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="追寻事">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">bash 脚本笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-14T11:33:19+08:00">
+                2017-12-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="bash变量"><a href="#bash变量" class="headerlink" title="bash变量"></a>bash变量</h3><h4 id="1）-本地变量"><a href="#1）-本地变量" class="headerlink" title="1） 本地变量"></a>1） 本地变量</h4><blockquote>
+<p><code>name=value</code> 读取变量 <code>$name</code> 作用域整个bash进程<br>这里省略了 set, <code>set name=value</code>，<br>撤销变量 <code>unset name</code>,不加<code>$</code>(针对变量本身不加<code>$</code>,如果针对变量的值就需要<code>$</code>)</p>
+</blockquote>
+<h4 id="2）-局部变量"><a href="#2）-局部变量" class="headerlink" title="2） 局部变量"></a>2） 局部变量</h4><blockquote>
+<p><code>LOCAL name= value</code> 作用域为当前代码段</p>
+</blockquote>
+<h4 id="3）-环境变量"><a href="#3）-环境变量" class="headerlink" title="3） 环境变量"></a>3） 环境变量</h4><blockquote>
+<p>作用域为当前shell进程及其子进程</p>
+</blockquote>
+<p>脚本在执行时会启动一个子shell进程:</p>
+<blockquote>
+<p>命令行中启动的脚本会继承当前shell的环境变量<br>系统自动执行的脚本（比如：crontab) 就需要自我定义环境变量了。</p>
+</blockquote>
+<h4 id="4）位置参数"><a href="#4）位置参数" class="headerlink" title="4）位置参数"></a>4）位置参数</h4><blockquote>
+<p><code>$1</code>, 脚本的第一个参数</p>
+</blockquote>
+<h4 id="5）特殊参数"><a href="#5）特殊参数" class="headerlink" title="5）特殊参数"></a>5）特殊参数</h4><blockquote>
+<p><code>$*</code>  输入了什么参数<br><code>$#</code>  输入了的参数个数<br><code>$1</code>  输入的第一个参数,依此类推，直到 $9<br><code>$?</code>  上一次的执行状态返回代码（0~255） 0没错误，其他有错误<br><code>$0</code>  该bash文件名<br><code>$@</code>  传给脚本的所有参数列表<br><code>$$</code>  脚本运行的当前进程ID</p>
+</blockquote>
+<h4 id="6）查看变量"><a href="#6）查看变量" class="headerlink" title="6）查看变量"></a>6）查看变量</h4><blockquote>
+<p><code>set</code> 所有变量，本地变量和环境变量<br><code>env</code>,<code>printenv</code>,<code>export</code> 环境变量<br>著名的公式<br>$$ E=mc^2 $$</p>
+</blockquote>
+<h4 id="7-IFS-分隔符"><a href="#7-IFS-分隔符" class="headerlink" title="7) IFS 分隔符"></a>7) IFS <code>分隔符</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#! /usr/bin/env bash</span><br><span class="line"></span><br><span class="line">IFS.OLD=$IFS</span><br><span class="line">IFS=$&apos;\n&apos;</span><br><span class="line">for entry in `cat /etc/passwd`</span><br><span class="line">do</span><br><span class="line">        echo &quot;Values in $entry---&quot;</span><br><span class="line">        IFS=:</span><br><span class="line">        for value in $entry</span><br><span class="line">        do</span><br><span class="line">                echo &quot;  $value&quot;</span><br><span class="line">        done</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h4 id="8-错误处理"><a href="#8-错误处理" class="headerlink" title="8) 错误处理"></a>8) 错误处理</h4><p>在很多脚本里看到 <code>set -e</code></p>
+<blockquote>
+<p><code>set -e</code>:Exit immediately if a command exits with a non-zero status. 最好脚本都加上</p>
+</blockquote>
+<p>但是<strong><em>直接退出</em></strong>并不是一个最佳实践，better use :<br><code>trap &#39;do_something&#39; ERR</code><br>to <code>run do_something</code> function when errors will occurs.</p>
+<h3 id="文件测试"><a href="#文件测试" class="headerlink" title="文件测试"></a>文件测试</h3><ol>
+<li>[ -d target ] target 是否是 目录</li>
+<li>[ -f target ] 是否是文件</li>
+<li>[ -e target ] 是否存在（目录和文件都适用）</li>
+<li>[ -x target ] 可执行文件</li>
+<li>[ -n “target” ] 是否为null,用双引号把变量名括</li>
+<li>[ -s target ] 如果文件存在且非空</li>
+<li>[ -z target] 是否是空</li>
+</ol>
+<h3 id="数值型比较"><a href="#数值型比较" class="headerlink" title="数值型比较"></a>数值型比较</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//变量赋值时,”=” 左右两边不能有空格</span><br><span class="line">age=30</span><br><span class="line"><span class="keyword">if</span> [ $ -ge 20]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span>“age is bigger than 20”</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span>“age is less than 20”</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line">// ---others-----</span><br><span class="line">–eq(equals)</span><br><span class="line">–ne(not equal)</span><br><span class="line">-gt( greater than)</span><br><span class="line">-lt(lessthan)</span><br><span class="line">-ge(greater or equal than)</span><br><span class="line">-le(less than or equal )</span><br></pre></td></tr></table></figure>
+<p>eg:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bootpercent= df –hT | grep “sda1” | awk “&#123;<span class="built_in">print</span> <span class="variable">$6</span>&#125;” | cut –d <span class="string">"%"</span> –f1</span><br><span class="line">   <span class="keyword">if</span> [<span class="variable">$bootpercent</span> –ge 80 ];<span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"percent is bigger than 80,warning!!!"</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"percent is less than 80"</span></span><br><span class="line">   <span class="keyword">fi</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="字符串比较"><a href="#字符串比较" class="headerlink" title="字符串比较"></a>字符串比较</h3><pre><code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># "=" 需要空格</span></span><br><span class="line">[ str1= str2 ] </span><br><span class="line"><span class="comment"># str 是否为空</span></span><br><span class="line">[ -z str ]</span><br></pre></td></tr></table></figure>
+</code></pre><h3 id="逻辑条件测试"><a href="#逻辑条件测试" class="headerlink" title="逻辑条件测试"></a>逻辑条件测试</h3><blockquote>
+<p>&amp;&amp;  ||<br>if<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">If [ <span class="variable">$age</span>–ge 30 ];<span class="keyword">then</span></span><br><span class="line">   <span class="built_in">echo</span> <span class="string">"great than 30"</span></span><br><span class="line"><span class="keyword">elif</span> [ <span class="variable">$age</span> –ge 40 ];<span class="keyword">then</span></span><br><span class="line">   <span class="built_in">echo</span> “great <span class="keyword">then</span> 40”</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">   <span class="built_in">echo</span> “50”</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure></p>
+<p>case<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#`` 里面是命令：今天周几</span></span><br><span class="line">week= `date +%w` </span><br><span class="line">       <span class="keyword">case</span><span class="variable">$week</span> <span class="keyword">in</span> : </span><br><span class="line">       start):</span><br><span class="line">           <span class="built_in">echo</span>“start”</span><br><span class="line">           ;;</span><br><span class="line">       stop):</span><br><span class="line">           <span class="built_in">echo</span>“stop”</span><br><span class="line">           ;;</span><br><span class="line">       *):</span><br><span class="line">           Echo “other”</span><br><span class="line">           ;;</span><br><span class="line">       <span class="keyword">esac</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="循环条件测试"><a href="#循环条件测试" class="headerlink" title="循环条件测试"></a>循环条件测试</h3><blockquote>
+<p>while<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">num=3</span><br><span class="line"><span class="keyword">while</span> [ <span class="variable">$num</span> –ge 0 ]</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span><span class="variable">$num</span></span><br><span class="line">    num=$((<span class="variable">$num</span>-1)) <span class="comment"># ‘=’左边的num不需要$ ?</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">    <span class="built_in">echo</span><span class="variable">$num</span></span><br></pre></td></tr></table></figure></p>
+<p>for<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> ` cat /var/user.txt`</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span><span class="variable">$i</span></span><br><span class="line">    echo123 | passwd –stdin <span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="shift：传入的参数左移"><a href="#shift：传入的参数左移" class="headerlink" title="shift：传入的参数左移"></a>shift：传入的参数左移</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">num=0</span><br><span class="line"><span class="keyword">while</span> [ <span class="variable">$#</span> -gt 0 ]</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">        num=$((num+ <span class="variable">$1</span>))</span><br><span class="line">        <span class="built_in">shift</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="variable">$num</span></span><br></pre></td></tr></table></figure>
+<h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">find/etc/ -perm 755 –<span class="built_in">type</span> f</span><br><span class="line"><span class="comment"># 跟find /etc –perm 755 | find –type f 不是一样，切记</span></span><br><span class="line">find /etc –user root</span><br><span class="line">find /etc –iname <span class="string">'user*'</span> | xargs rm –f</span><br></pre></td></tr></table></figure>
+<h3 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># $0-&gt;整行，$1-&gt;第一列</span></span><br><span class="line"><span class="comment"># NR(Number Row):行号</span></span><br><span class="line"><span class="comment"># NF(Number Field):列号</span></span><br><span class="line"></span><br><span class="line">cat/etc/passwd | awk –F <span class="string">":"</span> <span class="string">'&#123;if(NR==3)print $1,$4&#125;'</span> -&gt;打印第三行的第一个和第四个字段</span><br><span class="line">cat/etc/passwd | awk –F <span class="string">'END&#123;print NR&#125;'</span> -&gt;总共多少行</span><br><span class="line">cat/etc/passwd | awk –F ‘END&#123;<span class="built_in">print</span> NF&#125;’ -&gt;总共多少列</span><br><span class="line">cat/etc/passwd | awk –F “:” ‘&#123;<span class="function"><span class="title">if</span></span>()&#123;<span class="built_in">print</span> <span class="variable">$1</span>”\t”<span class="variable">$4</span>&#125;&#125;’</span><br><span class="line">cat/etc/passwd | awk ‘<span class="variable">$1</span> ~/192.168.10.1/ &#123;<span class="built_in">print</span> <span class="variable">$0</span> &#125; ’  -&gt; ~ 匹配，!~ 不匹配</span><br></pre></td></tr></table></figure>
+<h3 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># p -&gt; print, d-&gt; delete</span></span><br><span class="line">cat/etc/passwd | sed –n <span class="string">'5'</span>p –&gt; 打印第五行</span><br><span class="line">cat/etc/passwd | sed <span class="string">'3,6'</span>d -&gt; 打印删除3-6行之后的内容</span><br><span class="line">cat/etc/passwd | sed <span class="string">'/bash/'</span> p -&gt; 打印匹配bash 的行</span><br><span class="line">cat/etc/passwd | sed –n <span class="string">'1,/sync/'</span>p -&gt; 打印第一行到匹配sync的行</span><br><span class="line">cat/etc/passwd | sed –n <span class="string">'/root/,$'</span>p -&gt; 打印从匹配root 到结尾的所有行</span><br><span class="line">cat/etc/passwd | sed –n <span class="string">'3'</span>p | awk –F <span class="string">":"</span> <span class="string">'&#123;print $4&#125;'</span> –&gt; 39%</span><br><span class="line">cat/etc/passwd | sed –n <span class="string">'3'</span>p | awk –F <span class="string">":"</span> <span class="string">'&#123;print int($4)&#125;'</span> –&gt; 39</span><br></pre></td></tr></table></figure>
+<h3 id="uniq-与-sort"><a href="#uniq-与-sort" class="headerlink" title="uniq 与 sort"></a>uniq 与 sort</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">uniq–c  <span class="comment">#统计连续的次数</span></span><br><span class="line">catfile | sort –t: -k1 –r <span class="comment"># 以：为分隔符，取第一列，倒序排列</span></span><br></pre></td></tr></table></figure>
+<h3 id="linux-启动流程"><a href="#linux-启动流程" class="headerlink" title="linux 启动流程"></a>linux 启动流程</h3><h4 id="初始化阶段"><a href="#初始化阶段" class="headerlink" title="初始化阶段"></a>初始化阶段</h4><p> 1). Grub 引导界面<br> 2). 识别硬件<br> 3). 初始化驱动</p>
+<h4 id="加载-etc-rc-d-rc-sysinit-系统初始化"><a href="#加载-etc-rc-d-rc-sysinit-系统初始化" class="headerlink" title="加载/etc/rc.d/rc.sysinit 系统初始化"></a>加载/etc/rc.d/rc.sysinit 系统初始化</h4><p> 4). 进入欢迎界面<br> 5). 设置时钟<br> 6). 设置主机名<br> 7). 挂载文件系统<br> 8). 挂载光驱<br> 9). 进入3级别<br> 10). 启动虚拟内存<br> 11). 设置磁盘阵列</p>
+<h4 id="加载-etc-rc-d-rc-进程管理脚本"><a href="#加载-etc-rc-d-rc-进程管理脚本" class="headerlink" title="加载 /etc/rc.d/rc 进程管理脚本"></a>加载 /etc/rc.d/rc 进程管理脚本</h4><p> 12). 设置防火墙<br> 13). 检测硬件变化<br> 14). 启动网络服务<br> 15). 启动3级别中允许启动的进程(/etc/rc.d/rc3.d中以S开头的服务名,S99以后就是登陆界面了)<br> 16). 进入登陆界面</p>
+<h3 id="运行级别：-默认是3"><a href="#运行级别：-默认是3" class="headerlink" title="运行级别：(默认是3)"></a>运行级别：(默认是3)</h3><blockquote>
+<p><code>0</code>: halt<br><code>1</code>: singlemode user<br><code>2</code>: multiuser without NFS<br><code>3</code>: full multiuser<br><code>4</code>: unused<br><code>5</code>: X11 ( 3 with 图形界面)<br><code>6</code>: reboot (所以，重启的话reboot，还可以 init 6)<br>查看运行级别 runlevel</p>
+</blockquote>
+<h3 id="如何设置服务脚本在某个级别下开启或者关闭-以sshd为例"><a href="#如何设置服务脚本在某个级别下开启或者关闭-以sshd为例" class="headerlink" title="如何设置服务脚本在某个级别下开启或者关闭(以sshd为例)"></a>如何设置服务脚本在某个级别下开启或者关闭(以sshd为例)</h3><p> 1).  查看sshd 服务在所有级别下的开关状态</p>
+<pre><code>`chkconfig –list sshd`
+</code></pre><p> 2).  sshd 在 3 级别下开启/关闭</p>
+<pre><code>`chkconfig –level 3 sshd on/off`
+</code></pre><p> 3). 将自己的服务脚本改造成标准的rpm脚本<br>   <code>cp sshd /etc/init.d</code><br>    在 xxx 中添加：</p>
+<p><code>#chkconfig:2345 90 20</code> (90为开机的顺序，20为关机的顺序，数值越大，优先级越高，自定义的脚本开机应较晚5，关机较早)<br><code>#descrption: xxx server daemon</code></p>
+<p> 4). 通过service 把自定义脚本进行开启和关闭<br> <code>service xxx start|stop|restart</code></p>
+<p> 5). 通过chkconfig把自定义脚本设置为开机启动<br>    <code>chkconfig xxx on/off</code></p>
+<h3 id="原格式输出字符以及调用其他脚本"><a href="#原格式输出字符以及调用其他脚本" class="headerlink" title="原格式输出字符以及调用其他脚本"></a>原格式输出字符以及调用其他脚本</h3><blockquote>
+<p>menu.sh</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Cat 的 heredoc使用方法</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line">cat &lt;&lt; eof</span><br><span class="line">              aaaaaaaaaaaaaa</span><br><span class="line">              bbbbbbbbbbbbb</span><br><span class="line">              cccccccccccccccc  </span><br><span class="line">eof</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 引用 menu.sh</span></span><br><span class="line">. menu.sh</span><br></pre></td></tr></table></figure>
+<h3 id="设置颜色"><a href="#设置颜色" class="headerlink" title="设置颜色"></a>设置颜色</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># \033[ 设置颜色的标志，30 前底色，47 背景色，0m 还原</span></span><br><span class="line"><span class="built_in">echo</span> –e <span class="string">"\033[30;47m <span class="variable">$str</span> \033[0m"</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/14/cdh_offline_install/" rel="prev" title="CDH5.4.2 离线安装 - rhel6.6">
+                CDH5.4.2 离线安装 - rhel6.6 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">ted1769</p>
+              <p class="site-description motion-element" itemprop="description">一个博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#bash变量"><span class="nav-number">1.</span> <span class="nav-text"><a href="#bash&#x53D8;&#x91CF;" class="headerlink" title="bash&#x53D8;&#x91CF;"></a>bash&#x53D8;&#x91CF;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1）-本地变量"><span class="nav-number">1.1.</span> <span class="nav-text"><a href="#1&#xFF09;-&#x672C;&#x5730;&#x53D8;&#x91CF;" class="headerlink" title="1&#xFF09; &#x672C;&#x5730;&#x53D8;&#x91CF;"></a>1&#xFF09; &#x672C;&#x5730;&#x53D8;&#x91CF;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2）-局部变量"><span class="nav-number">1.2.</span> <span class="nav-text"><a href="#2&#xFF09;-&#x5C40;&#x90E8;&#x53D8;&#x91CF;" class="headerlink" title="2&#xFF09; &#x5C40;&#x90E8;&#x53D8;&#x91CF;"></a>2&#xFF09; &#x5C40;&#x90E8;&#x53D8;&#x91CF;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3）-环境变量"><span class="nav-number">1.3.</span> <span class="nav-text"><a href="#3&#xFF09;-&#x73AF;&#x5883;&#x53D8;&#x91CF;" class="headerlink" title="3&#xFF09; &#x73AF;&#x5883;&#x53D8;&#x91CF;"></a>3&#xFF09; &#x73AF;&#x5883;&#x53D8;&#x91CF;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4）位置参数"><span class="nav-number">1.4.</span> <span class="nav-text"><a href="#4&#xFF09;&#x4F4D;&#x7F6E;&#x53C2;&#x6570;" class="headerlink" title="4&#xFF09;&#x4F4D;&#x7F6E;&#x53C2;&#x6570;"></a>4&#xFF09;&#x4F4D;&#x7F6E;&#x53C2;&#x6570;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5）特殊参数"><span class="nav-number">1.5.</span> <span class="nav-text"><a href="#5&#xFF09;&#x7279;&#x6B8A;&#x53C2;&#x6570;" class="headerlink" title="5&#xFF09;&#x7279;&#x6B8A;&#x53C2;&#x6570;"></a>5&#xFF09;&#x7279;&#x6B8A;&#x53C2;&#x6570;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6）查看变量"><span class="nav-number">1.6.</span> <span class="nav-text"><a href="#6&#xFF09;&#x67E5;&#x770B;&#x53D8;&#x91CF;" class="headerlink" title="6&#xFF09;&#x67E5;&#x770B;&#x53D8;&#x91CF;"></a>6&#xFF09;&#x67E5;&#x770B;&#x53D8;&#x91CF;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-IFS-分隔符"><span class="nav-number">1.7.</span> <span class="nav-text"><a href="#7-IFS-&#x5206;&#x9694;&#x7B26;" class="headerlink" title="7) IFS &#x5206;&#x9694;&#x7B26;"></a>7) IFS <code>&#x5206;&#x9694;&#x7B26;</code></span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-错误处理"><span class="nav-number">1.8.</span> <span class="nav-text"><a href="#8-&#x9519;&#x8BEF;&#x5904;&#x7406;" class="headerlink" title="8) &#x9519;&#x8BEF;&#x5904;&#x7406;"></a>8) &#x9519;&#x8BEF;&#x5904;&#x7406;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件测试"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x6587;&#x4EF6;&#x6D4B;&#x8BD5;" class="headerlink" title="&#x6587;&#x4EF6;&#x6D4B;&#x8BD5;"></a>&#x6587;&#x4EF6;&#x6D4B;&#x8BD5;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数值型比较"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x6570;&#x503C;&#x578B;&#x6BD4;&#x8F83;" class="headerlink" title="&#x6570;&#x503C;&#x578B;&#x6BD4;&#x8F83;"></a>&#x6570;&#x503C;&#x578B;&#x6BD4;&#x8F83;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串比较"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x5B57;&#x7B26;&#x4E32;&#x6BD4;&#x8F83;" class="headerlink" title="&#x5B57;&#x7B26;&#x4E32;&#x6BD4;&#x8F83;"></a>&#x5B57;&#x7B26;&#x4E32;&#x6BD4;&#x8F83;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑条件测试"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x903B;&#x8F91;&#x6761;&#x4EF6;&#x6D4B;&#x8BD5;" class="headerlink" title="&#x903B;&#x8F91;&#x6761;&#x4EF6;&#x6D4B;&#x8BD5;"></a>&#x903B;&#x8F91;&#x6761;&#x4EF6;&#x6D4B;&#x8BD5;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环条件测试"><span class="nav-number">6.</span> <span class="nav-text"><a href="#&#x5FAA;&#x73AF;&#x6761;&#x4EF6;&#x6D4B;&#x8BD5;" class="headerlink" title="&#x5FAA;&#x73AF;&#x6761;&#x4EF6;&#x6D4B;&#x8BD5;"></a>&#x5FAA;&#x73AF;&#x6761;&#x4EF6;&#x6D4B;&#x8BD5;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shift：传入的参数左移"><span class="nav-number">7.</span> <span class="nav-text"><a href="#shift&#xFF1A;&#x4F20;&#x5165;&#x7684;&#x53C2;&#x6570;&#x5DE6;&#x79FB;" class="headerlink" title="shift&#xFF1A;&#x4F20;&#x5165;&#x7684;&#x53C2;&#x6570;&#x5DE6;&#x79FB;"></a>shift&#xFF1A;&#x4F20;&#x5165;&#x7684;&#x53C2;&#x6570;&#x5DE6;&#x79FB;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#find"><span class="nav-number">8.</span> <span class="nav-text"><a href="#find" class="headerlink" title="find"></a>find</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#awk"><span class="nav-number">9.</span> <span class="nav-text"><a href="#awk" class="headerlink" title="awk"></a>awk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sed"><span class="nav-number">10.</span> <span class="nav-text"><a href="#sed" class="headerlink" title="sed"></a>sed</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#uniq-与-sort"><span class="nav-number">11.</span> <span class="nav-text"><a href="#uniq-&#x4E0E;-sort" class="headerlink" title="uniq &#x4E0E; sort"></a>uniq &#x4E0E; sort</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-启动流程"><span class="nav-number">12.</span> <span class="nav-text"><a href="#linux-&#x542F;&#x52A8;&#x6D41;&#x7A0B;" class="headerlink" title="linux &#x542F;&#x52A8;&#x6D41;&#x7A0B;"></a>linux &#x542F;&#x52A8;&#x6D41;&#x7A0B;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化阶段"><span class="nav-number">12.1.</span> <span class="nav-text"><a href="#&#x521D;&#x59CB;&#x5316;&#x9636;&#x6BB5;" class="headerlink" title="&#x521D;&#x59CB;&#x5316;&#x9636;&#x6BB5;"></a>&#x521D;&#x59CB;&#x5316;&#x9636;&#x6BB5;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#加载-etc-rc-d-rc-sysinit-系统初始化"><span class="nav-number">12.2.</span> <span class="nav-text"><a href="#&#x52A0;&#x8F7D;-etc-rc-d-rc-sysinit-&#x7CFB;&#x7EDF;&#x521D;&#x59CB;&#x5316;" class="headerlink" title="&#x52A0;&#x8F7D;/etc/rc.d/rc.sysinit &#x7CFB;&#x7EDF;&#x521D;&#x59CB;&#x5316;"></a>&#x52A0;&#x8F7D;/etc/rc.d/rc.sysinit &#x7CFB;&#x7EDF;&#x521D;&#x59CB;&#x5316;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#加载-etc-rc-d-rc-进程管理脚本"><span class="nav-number">12.3.</span> <span class="nav-text"><a href="#&#x52A0;&#x8F7D;-etc-rc-d-rc-&#x8FDB;&#x7A0B;&#x7BA1;&#x7406;&#x811A;&#x672C;" class="headerlink" title="&#x52A0;&#x8F7D; /etc/rc.d/rc &#x8FDB;&#x7A0B;&#x7BA1;&#x7406;&#x811A;&#x672C;"></a>&#x52A0;&#x8F7D; /etc/rc.d/rc &#x8FDB;&#x7A0B;&#x7BA1;&#x7406;&#x811A;&#x672C;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行级别：-默认是3"><span class="nav-number">13.</span> <span class="nav-text"><a href="#&#x8FD0;&#x884C;&#x7EA7;&#x522B;&#xFF1A;-&#x9ED8;&#x8BA4;&#x662F;3" class="headerlink" title="&#x8FD0;&#x884C;&#x7EA7;&#x522B;&#xFF1A;(&#x9ED8;&#x8BA4;&#x662F;3)"></a>&#x8FD0;&#x884C;&#x7EA7;&#x522B;&#xFF1A;(&#x9ED8;&#x8BA4;&#x662F;3)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何设置服务脚本在某个级别下开启或者关闭-以sshd为例"><span class="nav-number">14.</span> <span class="nav-text"><a href="#&#x5982;&#x4F55;&#x8BBE;&#x7F6E;&#x670D;&#x52A1;&#x811A;&#x672C;&#x5728;&#x67D0;&#x4E2A;&#x7EA7;&#x522B;&#x4E0B;&#x5F00;&#x542F;&#x6216;&#x8005;&#x5173;&#x95ED;-&#x4EE5;sshd&#x4E3A;&#x4F8B;" class="headerlink" title="&#x5982;&#x4F55;&#x8BBE;&#x7F6E;&#x670D;&#x52A1;&#x811A;&#x672C;&#x5728;&#x67D0;&#x4E2A;&#x7EA7;&#x522B;&#x4E0B;&#x5F00;&#x542F;&#x6216;&#x8005;&#x5173;&#x95ED;(&#x4EE5;sshd&#x4E3A;&#x4F8B;)"></a>&#x5982;&#x4F55;&#x8BBE;&#x7F6E;&#x670D;&#x52A1;&#x811A;&#x672C;&#x5728;&#x67D0;&#x4E2A;&#x7EA7;&#x522B;&#x4E0B;&#x5F00;&#x542F;&#x6216;&#x8005;&#x5173;&#x95ED;(&#x4EE5;sshd&#x4E3A;&#x4F8B;)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原格式输出字符以及调用其他脚本"><span class="nav-number">15.</span> <span class="nav-text"><a href="#&#x539F;&#x683C;&#x5F0F;&#x8F93;&#x51FA;&#x5B57;&#x7B26;&#x4EE5;&#x53CA;&#x8C03;&#x7528;&#x5176;&#x4ED6;&#x811A;&#x672C;" class="headerlink" title="&#x539F;&#x683C;&#x5F0F;&#x8F93;&#x51FA;&#x5B57;&#x7B26;&#x4EE5;&#x53CA;&#x8C03;&#x7528;&#x5176;&#x4ED6;&#x811A;&#x672C;"></a>&#x539F;&#x683C;&#x5F0F;&#x8F93;&#x51FA;&#x5B57;&#x7B26;&#x4EE5;&#x53CA;&#x8C03;&#x7528;&#x5176;&#x4ED6;&#x811A;&#x672C;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置颜色"><span class="nav-number">16.</span> <span class="nav-text"><a href="#&#x8BBE;&#x7F6E;&#x989C;&#x8272;" class="headerlink" title="&#x8BBE;&#x7F6E;&#x989C;&#x8272;"></a>&#x8BBE;&#x7F6E;&#x989C;&#x8272;</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ted1769</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
