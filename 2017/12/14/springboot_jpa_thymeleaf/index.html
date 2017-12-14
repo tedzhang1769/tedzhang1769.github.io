@@ -1,304 +1,187 @@
 <!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
 
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="idea 指导1 File -&amp;gt; New -&amp;gt; Project -&amp;gt; Spring Initializr2 SDK 选择 1.83 Project Metedata 默认4 Dependencies 里面 左边Web 选择Web 左边Template Engines 选择 Thymeleaf 左边SQL 选择 JPA （JPA是封装了Hibernate的数据库连接组件）  5 其">
-<meta property="og:type" content="article">
-<meta property="og:title" content="用idea 从 0 开始搭建 spring boot + jpa + thymeleaf">
-<meta property="og:url" content="http://yoursite.com/2017/12/14/springboot_jpa_thymeleaf/index.html">
-<meta property="og:site_name" content="追寻事">
-<meta property="og:description" content="idea 指导1 File -&amp;gt; New -&amp;gt; Project -&amp;gt; Spring Initializr2 SDK 选择 1.83 Project Metedata 默认4 Dependencies 里面 左边Web 选择Web 左边Template Engines 选择 Thymeleaf 左边SQL 选择 JPA （JPA是封装了Hibernate的数据库连接组件）  5 其">
-<meta property="og:updated_time" content="2017-12-14T02:51:46.009Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="用idea 从 0 开始搭建 spring boot + jpa + thymeleaf">
-<meta name="twitter:description" content="idea 指导1 File -&amp;gt; New -&amp;gt; Project -&amp;gt; Spring Initializr2 SDK 选择 1.83 Project Metedata 默认4 Dependencies 里面 左边Web 选择Web 左边Template Engines 选择 Thymeleaf 左边SQL 选择 JPA （JPA是封装了Hibernate的数据库连接组件）  5 其">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '5.1.3',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://yoursite.com/2017/12/14/springboot_jpa_thymeleaf/"/>
-
-
-
-
-
   <title>用idea 从 0 开始搭建 spring boot + jpa + thymeleaf | 追寻事</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="追寻事">
+    <meta name="author" content="ted1769">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="追寻事" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
   
 
-
-
-
-
-
-
-
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
 
-  
-  
-    
-  
+      <!-- ============================ Off-canvas navigation =========================== -->
 
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">追寻事</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle"></p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Startseite
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archiv
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/14/springboot_jpa_thymeleaf/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ted1769">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="追寻事">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">用idea 从 0 开始搭建 spring boot + jpa + thymeleaf</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-14T11:33:19+08:00">
-                2017-12-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
         </div>
-      </header>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
     
+    <!-- ============================ END Off-canvas navigation =========================== -->
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">追寻事</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
 
       
-      
-
-      
-        <h3 id="idea-指导"><a href="#idea-指导" class="headerlink" title="idea 指导"></a>idea 指导</h3><h4 id="1-File-gt-New-gt-Project-gt-Spring-Initializr"><a href="#1-File-gt-New-gt-Project-gt-Spring-Initializr" class="headerlink" title="1 File -&gt; New -&gt; Project -&gt; Spring Initializr"></a>1 File -&gt; New -&gt; Project -&gt; Spring Initializr</h4><h4 id="2-SDK-选择-1-8"><a href="#2-SDK-选择-1-8" class="headerlink" title="2 SDK 选择 1.8"></a>2 SDK 选择 1.8</h4><h4 id="3-Project-Metedata-默认"><a href="#3-Project-Metedata-默认" class="headerlink" title="3 Project Metedata 默认"></a>3 Project Metedata 默认</h4><h4 id="4-Dependencies-里面"><a href="#4-Dependencies-里面" class="headerlink" title="4 Dependencies 里面"></a>4 Dependencies 里面</h4><ul>
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-12-14T03:33:19.955Z" itemprop="datePublished">
+          2017-12-14
+      </time>
+    
+</span>
+                <h1>用idea 从 0 开始搭建 spring boot + jpa + thymeleaf</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h3 id="idea-指导"><a href="#idea-指导" class="headerlink" title="idea 指导"></a>idea 指导</h3><h4 id="1-File-gt-New-gt-Project-gt-Spring-Initializr"><a href="#1-File-gt-New-gt-Project-gt-Spring-Initializr" class="headerlink" title="1 File -&gt; New -&gt; Project -&gt; Spring Initializr"></a>1 File -&gt; New -&gt; Project -&gt; Spring Initializr</h4><h4 id="2-SDK-选择-1-8"><a href="#2-SDK-选择-1-8" class="headerlink" title="2 SDK 选择 1.8"></a>2 SDK 选择 1.8</h4><h4 id="3-Project-Metedata-默认"><a href="#3-Project-Metedata-默认" class="headerlink" title="3 Project Metedata 默认"></a>3 Project Metedata 默认</h4><h4 id="4-Dependencies-里面"><a href="#4-Dependencies-里面" class="headerlink" title="4 Dependencies 里面"></a>4 Dependencies 里面</h4><ul>
 <li>左边Web 选择Web</li>
 <li>左边Template Engines 选择 Thymeleaf</li>
 <li>左边SQL 选择 JPA （JPA是封装了Hibernate的数据库连接组件）</li>
@@ -330,361 +213,128 @@
 <li>在 idea 中，<code>${message}</code>会报错，说<code>Cannot resolve &#39;message&#39;</code>，不用管，能正常解析。</li>
 </ol>
 
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/12/14/python_yield/" rel="next" title="yield 探讨">
-                <i class="fa fa-chevron-left"></i> yield 探讨
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/14/vagrant_guide/" rel="prev" title="vagrant 简明教程">
-                vagrant 简明教程 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
+        <nav class="pagination" role="pagination">
     
-    <div class="sidebar-inner">
+    <a class="pull-left" href="/2017/12/14/vagrant_guide/" style="float: left;">
+        ← vagrant 简明教程
+    </a>
+    
+    
+    <a class="pull-right" href="/2017/12/14/python_yield/">
+        yield 探讨 →
+    </a>
+    
+</nav>
 
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">ted1769</p>
-              <p class="site-description motion-element" itemprop="description">一个博客</p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">27</span>
-                  <span class="site-state-item-name">Artikel</span>
-                </a>
-              </div>
-            
-
-            
-
-            
-
-          </nav>
-
-          
-
-          <div class="links-of-author motion-element">
-            
-          </div>
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#idea-指导"><span class="nav-number">1.</span> <span class="nav-text"><a href="#idea-&#x6307;&#x5BFC;" class="headerlink" title="idea &#x6307;&#x5BFC;"></a>idea &#x6307;&#x5BFC;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-File-gt-New-gt-Project-gt-Spring-Initializr"><span class="nav-number">1.1.</span> <span class="nav-text"><a href="#1-File-gt-New-gt-Project-gt-Spring-Initializr" class="headerlink" title="1 File -&gt; New -&gt; Project -&gt; Spring Initializr"></a>1 File -&gt; New -&gt; Project -&gt; Spring Initializr</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-SDK-选择-1-8"><span class="nav-number">1.2.</span> <span class="nav-text"><a href="#2-SDK-&#x9009;&#x62E9;-1-8" class="headerlink" title="2 SDK &#x9009;&#x62E9; 1.8"></a>2 SDK &#x9009;&#x62E9; 1.8</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Project-Metedata-默认"><span class="nav-number">1.3.</span> <span class="nav-text"><a href="#3-Project-Metedata-&#x9ED8;&#x8BA4;" class="headerlink" title="3 Project Metedata &#x9ED8;&#x8BA4;"></a>3 Project Metedata &#x9ED8;&#x8BA4;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Dependencies-里面"><span class="nav-number">1.4.</span> <span class="nav-text"><a href="#4-Dependencies-&#x91CC;&#x9762;" class="headerlink" title="4 Dependencies &#x91CC;&#x9762;"></a>4 Dependencies &#x91CC;&#x9762;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-其他默认"><span class="nav-number">1.5.</span> <span class="nav-text"><a href="#5-&#x5176;&#x4ED6;&#x9ED8;&#x8BA4;" class="headerlink" title="5 &#x5176;&#x4ED6;&#x9ED8;&#x8BA4;"></a>5 &#x5176;&#x4ED6;&#x9ED8;&#x8BA4;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接下来是pom-xml的配置。"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x63A5;&#x4E0B;&#x6765;&#x662F;pom-xml&#x7684;&#x914D;&#x7F6E;&#x3002;" class="headerlink" title="&#x63A5;&#x4E0B;&#x6765;&#x662F;pom.xml&#x7684;&#x914D;&#x7F6E;&#x3002;"></a>&#x63A5;&#x4E0B;&#x6765;&#x662F;<code>pom.xml</code>&#x7684;&#x914D;&#x7F6E;&#x3002;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库是用的mysql-需要在依赖中加入"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#x6570;&#x636E;&#x5E93;&#x662F;&#x7528;&#x7684;mysql-&#x9700;&#x8981;&#x5728;&#x4F9D;&#x8D56;&#x4E2D;&#x52A0;&#x5165;" class="headerlink" title="&#x6570;&#x636E;&#x5E93;&#x662F;&#x7528;&#x7684;mysql,&#x9700;&#x8981;&#x5728;&#x4F9D;&#x8D56;&#x4E2D;&#x52A0;&#x5165;"></a>&#x6570;&#x636E;&#x5E93;&#x662F;&#x7528;&#x7684;mysql,&#x9700;&#x8981;&#x5728;&#x4F9D;&#x8D56;&#x4E2D;&#x52A0;&#x5165;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对了，在前端页面开发，会用到jquery-和-boostrap-所以"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#&#x5BF9;&#x4E86;&#xFF0C;&#x5728;&#x524D;&#x7AEF;&#x9875;&#x9762;&#x5F00;&#x53D1;&#xFF0C;&#x4F1A;&#x7528;&#x5230;jquery-&#x548C;-boostrap-&#x6240;&#x4EE5;" class="headerlink" title="&#x5BF9;&#x4E86;&#xFF0C;&#x5728;&#x524D;&#x7AEF;&#x9875;&#x9762;&#x5F00;&#x53D1;&#xFF0C;&#x4F1A;&#x7528;&#x5230;jquery &#x548C; boostrap,&#x6240;&#x4EE5;"></a>&#x5BF9;&#x4E86;&#xFF0C;&#x5728;&#x524D;&#x7AEF;&#x9875;&#x9762;&#x5F00;&#x53D1;&#xFF0C;&#x4F1A;&#x7528;&#x5230;<code>jquery</code> &#x548C; <code>boostrap</code>,&#x6240;&#x4EE5;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#所以整个pom-xml-文件是："><span class="nav-number">2.3.</span> <span class="nav-text"><a href="#&#x6240;&#x4EE5;&#x6574;&#x4E2A;pom-xml-&#x6587;&#x4EF6;&#x662F;&#xFF1A;" class="headerlink" title="&#x6240;&#x4EE5;&#x6574;&#x4E2A;pom.xml &#x6587;&#x4EF6;&#x662F;&#xFF1A;"></a>&#x6240;&#x4EE5;&#x6574;&#x4E2A;pom.xml &#x6587;&#x4EF6;&#x662F;&#xFF1A;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下来是-application-properties-的配置"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E0B;&#x6765;&#x662F;-application-properties-&#x7684;&#x914D;&#x7F6E;" class="headerlink" title="&#x4E0B;&#x6765;&#x662F; application.properties &#x7684;&#x914D;&#x7F6E;"></a>&#x4E0B;&#x6765;&#x662F; <code>application.properties</code> &#x7684;&#x914D;&#x7F6E;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码部分"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x4EE3;&#x7801;&#x90E8;&#x5206;" class="headerlink" title="&#x4EE3;&#x7801;&#x90E8;&#x5206;"></a>&#x4EE3;&#x7801;&#x90E8;&#x5206;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#启动类-Monitoring2Application"><span class="nav-number">4.1.</span> <span class="nav-text"><a href="#&#x542F;&#x52A8;&#x7C7B;-Monitoring2Application" class="headerlink" title="&#x542F;&#x52A8;&#x7C7B;: Monitoring2Application"></a>&#x542F;&#x52A8;&#x7C7B;: <code>Monitoring2Application</code></span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Model-Host"><span class="nav-number">4.2.</span> <span class="nav-text"><a href="#Model-Host" class="headerlink" title="Model:Host"></a>Model:<code>Host</code></span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Repository-HostRepository"><span class="nav-number">4.3.</span> <span class="nav-text"><a href="#Repository-HostRepository" class="headerlink" title="Repository:HostRepository"></a>Repository:<code>HostRepository</code></span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Service：HostService"><span class="nav-number">4.4.</span> <span class="nav-text"><a href="#Service&#xFF1A;HostService" class="headerlink" title="Service&#xFF1A;HostService"></a>Service&#xFF1A;<code>HostService</code></span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ServiceImpl-HostServiceImpl"><span class="nav-number">4.5.</span> <span class="nav-text"><a href="#ServiceImpl-HostServiceImpl" class="headerlink" title="ServiceImpl: HostServiceImpl"></a>ServiceImpl: <code>HostServiceImpl</code></span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Controller：HostController"><span class="nav-number">4.6.</span> <span class="nav-text"><a href="#Controller&#xFF1A;HostController" class="headerlink" title="Controller&#xFF1A;HostController"></a>Controller&#xFF1A;<code>HostController</code></span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#页面-host-html-注意，后缀名是-html，不是-jsp，静态页面也支持啦，更有利于前后端分离。"><span class="nav-number">4.7.</span> <span class="nav-text"><a href="#&#x9875;&#x9762;-host-html-&#x6CE8;&#x610F;&#xFF0C;&#x540E;&#x7F00;&#x540D;&#x662F;-html&#xFF0C;&#x4E0D;&#x662F;-jsp&#xFF0C;&#x9759;&#x6001;&#x9875;&#x9762;&#x4E5F;&#x652F;&#x6301;&#x5566;&#xFF0C;&#x66F4;&#x6709;&#x5229;&#x4E8E;&#x524D;&#x540E;&#x7AEF;&#x5206;&#x79BB;&#x3002;" class="headerlink" title="&#x9875;&#x9762; host.html &#x6CE8;&#x610F;&#xFF0C;&#x540E;&#x7F00;&#x540D;&#x662F;.html&#xFF0C;&#x4E0D;&#x662F;.jsp&#xFF0C;&#x9759;&#x6001;&#x9875;&#x9762;&#x4E5F;&#x652F;&#x6301;&#x5566;&#xFF0C;&#x66F4;&#x6709;&#x5229;&#x4E8E;&#x524D;&#x540E;&#x7AEF;&#x5206;&#x79BB;&#x3002;"></a>&#x9875;&#x9762; <code>host.html</code> &#x6CE8;&#x610F;&#xFF0C;&#x540E;&#x7F00;&#x540D;&#x662F;<code>.html</code>&#xFF0C;&#x4E0D;&#x662F;<code>.jsp</code>&#xFF0C;&#x9759;&#x6001;&#x9875;&#x9762;&#x4E5F;&#x652F;&#x6301;&#x5566;&#xFF0C;&#x66F4;&#x6709;&#x5229;&#x4E8E;&#x524D;&#x540E;&#x7AEF;&#x5206;&#x79BB;&#x3002;</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
+        <div class="duoshuo">
 
 
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">ted1769</span>
-
-  
 </div>
+    </div>
+</section>
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+      
+<!-- ============================ Footer =========================== -->
 
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By ted1769. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran</a></p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
 
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
-
-  
-
+<!-- ============================ END Footer =========================== -->
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
 <script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
   }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
 </script>
 
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
 
 </body>
 </html>
