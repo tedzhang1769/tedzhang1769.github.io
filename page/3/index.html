@@ -82,7 +82,7 @@
 <meta name="description" content="一个博客">
 <meta property="og:type" content="website">
 <meta property="og:title" content="追寻事">
-<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+<meta property="og:url" content="http://tedzhang.cc/page/3/index.html">
 <meta property="og:site_name" content="追寻事">
 <meta property="og:description" content="一个博客">
 <meta name="twitter:card" content="summary">
@@ -117,7 +117,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/page/3/"/>
+  <link rel="canonical" href="http://tedzhang.cc/page/3/"/>
 
 
 
@@ -184,7 +184,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            Startseite
           </a>
         </li>
       
@@ -194,7 +194,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            Archiv
           </a>
         </li>
       
@@ -231,7 +231,157 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/14/docker_command/">
+    <link itemprop="mainEntityOfPage" href="http://tedzhang.cc/2017/12/14/docker_guide-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ted1769">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="追寻事">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/14/docker_guide-1/" itemprop="url">docker guide (1)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-14T11:33:19+08:00">
+                2017-12-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li>install docker <code>apt-get install  docker</code><br> also works <code>wget -qO- https://get.docker.com/ | sh</code></li>
+<li><p>run hello-world image <code>docker run hello-world</code> </p>
+<blockquote>
+<p><code>docker</code> tells os you are using docker program<br><code>run</code> a subcommand that creates &amp; run a Docker container<br><code>hello-world</code> tells docker which image to load into the container </p>
+</blockquote>
+<p> （1）find it locally<br> （2）if not available,find it on the hub<br> （3）load the image into the container and ran it<br> <code>docker run docker/whalesay cowsay boo</code></p>
+</li>
+<li>find image whick you want on the hub  </li>
+<li>list your local images <code>docker images</code>    </li>
+<li>build your own image<br> (1) write a Dockerfile, add lines to the file like this:<pre><code>[1]`FROM docker/whalesay:latest`  
+whick image your image is based on.
+[2]`RUN apt-get -y update &amp;&amp; apt-get install -y fortunes`
+add the `fortunes` program to the image.
+[3]`CMD /usr/games/fortune -a | cowsay`
+tells the `fortunes` program to pass a nifty quote to the `cowsay` program.
+</code></pre> (2) build an imange from your Dockerfile<ul>
+<li><code>docker bulid -t docker-whale .</code> (don’t forget . period)<br>this command takes the <code>Dockerfile</code> in the current dir,and bulids an imge called docker-whale on your local machine.</li>
+</ul>
+</li>
+<li>list your new images</li>
+<li>tag,push ,and pull your image<br> (1) tag and push the image<br> <code>docker images</code> list images on your local machine, and pick up the <code>IMAGE ID</code> specified.<ul>
+<li><code>docker tag 5452ad69d37f zhangjianbo1989/docker-whale:latest</code> <blockquote>
+<p><code>docker</code> use the docker program<br><code>tag</code> a subcommand that tags an image<br><code>5452ad69d37f</code> <code>IMAGE ID</code><br><code>zhangjianbo1989</code> your account name from Docker Hub.<br><code>docker-whale</code> the image name<br><code>latest</code> version label</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>push your image to your repository on the hub.<br> <code>docker push zhangjianbo1989/docker-whale</code></li>
+<li>delete images from your local machine<br> <code>docker rmi</code></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://tedzhang.cc/2017/12/14/docker_command/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ted1769">
@@ -260,7 +410,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-14T11:33:19+08:00">
                 2017-12-14
@@ -435,7 +585,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/14/compiler_pricinpel/">
+    <link itemprop="mainEntityOfPage" href="http://tedzhang.cc/2017/12/14/compiler_pricinpel/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ted1769">
@@ -464,7 +614,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-14T11:33:19+08:00">
                 2017-12-14
@@ -558,7 +708,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/14/centos7.3_smokeping/">
+    <link itemprop="mainEntityOfPage" href="http://tedzhang.cc/2017/12/14/centos7.3_smokeping/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ted1769">
@@ -587,7 +737,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-14T11:33:19+08:00">
                 2017-12-14
@@ -749,7 +899,7 @@ cp config.dist config</code></p>
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/14/centos_r_sparkr/">
+    <link itemprop="mainEntityOfPage" href="http://tedzhang.cc/2017/12/14/centos_r_sparkr/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ted1769">
@@ -778,7 +928,7 @@ cp config.dist config</code></p>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-14T11:33:19+08:00">
                 2017-12-14
@@ -889,7 +1039,7 @@ cp config.dist config</code></p>
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/14/cdh_optimizer/">
+    <link itemprop="mainEntityOfPage" href="http://tedzhang.cc/2017/12/14/cdh_optimizer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ted1769">
@@ -918,7 +1068,7 @@ cp config.dist config</code></p>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-14T11:33:19+08:00">
                 2017-12-14
@@ -1012,7 +1162,7 @@ cp config.dist config</code></p>
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/14/cdh_offline_install/">
+    <link itemprop="mainEntityOfPage" href="http://tedzhang.cc/2017/12/14/cdh_offline_install/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ted1769">
@@ -1041,7 +1191,7 @@ cp config.dist config</code></p>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-14T11:33:19+08:00">
                 2017-12-14
@@ -1214,7 +1364,7 @@ cp config.dist config</code></p>
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/14/bash_script-1/">
+    <link itemprop="mainEntityOfPage" href="http://tedzhang.cc/2017/12/14/bash_script-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ted1769">
@@ -1243,7 +1393,7 @@ cp config.dist config</code></p>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-14T11:33:19+08:00">
                 2017-12-14
@@ -1443,8 +1593,8 @@ cp config.dist config</code></p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">27</span>
-                  <span class="site-state-item-name">posts</span>
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">Artikel</span>
                 </a>
               </div>
             
@@ -1496,7 +1646,7 @@ cp config.dist config</code></p>
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 

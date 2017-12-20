@@ -79,16 +79,16 @@
 
 
 
-<meta name="description" content="Abstract我们推出mesos，一个可以在不同计算框架(computing frameworks)（例如hadoop，MPI）之间，共享资源的平台。共享资源能提交提高集群的资源利用率，避免每个应用数据复制。Mesos以细粒度的方式来资源共享，允许多种框架通过顺序读取每台机器上的数据来实现数据本地化(data liocality)。为支持现在frameworks复杂的调度，Mesos提出一种叫资">
+<meta name="description" content="绵延的山路上有座牌坊高大而鲜亮牌坊的这头通向前世牌坊的那头通向今生  矮小的山丘上有盏路灯灯光熹微昏黄照得到的地方是地狱照不到的地方是天堂">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mesos：数据中心的细粒度资源共享平台">
-<meta property="og:url" content="http://tedzhang.cc/2017/12/14/mesos_intro/index.html">
+<meta property="og:title" content="牌坊">
+<meta property="og:url" content="http://tedzhang.cc/2017/12/20/poem_life/index.html">
 <meta property="og:site_name" content="追寻事">
-<meta property="og:description" content="Abstract我们推出mesos，一个可以在不同计算框架(computing frameworks)（例如hadoop，MPI）之间，共享资源的平台。共享资源能提交提高集群的资源利用率，避免每个应用数据复制。Mesos以细粒度的方式来资源共享，允许多种框架通过顺序读取每台机器上的数据来实现数据本地化(data liocality)。为支持现在frameworks复杂的调度，Mesos提出一种叫资">
-<meta property="og:updated_time" content="2017-12-12T05:26:22.945Z">
+<meta property="og:description" content="绵延的山路上有座牌坊高大而鲜亮牌坊的这头通向前世牌坊的那头通向今生  矮小的山丘上有盏路灯灯光熹微昏黄照得到的地方是地狱照不到的地方是天堂">
+<meta property="og:updated_time" content="2017-12-20T00:02:50.417Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mesos：数据中心的细粒度资源共享平台">
-<meta name="twitter:description" content="Abstract我们推出mesos，一个可以在不同计算框架(computing frameworks)（例如hadoop，MPI）之间，共享资源的平台。共享资源能提交提高集群的资源利用率，避免每个应用数据复制。Mesos以细粒度的方式来资源共享，允许多种框架通过顺序读取每台机器上的数据来实现数据本地化(data liocality)。为支持现在frameworks复杂的调度，Mesos提出一种叫资">
+<meta name="twitter:title" content="牌坊">
+<meta name="twitter:description" content="绵延的山路上有座牌坊高大而鲜亮牌坊的这头通向前世牌坊的那头通向今生  矮小的山丘上有盏路灯灯光熹微昏黄照得到的地方是地狱照不到的地方是天堂">
 
 
 
@@ -118,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://tedzhang.cc/2017/12/14/mesos_intro/"/>
+  <link rel="canonical" href="http://tedzhang.cc/2017/12/20/poem_life/"/>
 
 
 
 
 
-  <title>Mesos：数据中心的细粒度资源共享平台 | 追寻事</title>
+  <title>牌坊 | 追寻事</title>
   
 
 
@@ -231,7 +231,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://tedzhang.cc/2017/12/14/mesos_intro/">
+    <link itemprop="mainEntityOfPage" href="http://tedzhang.cc/2017/12/20/poem_life/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ted1769">
@@ -248,7 +248,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Mesos：数据中心的细粒度资源共享平台</h1>
+          <h1 class="post-title" itemprop="name headline">牌坊</h1>
         
 
         <div class="post-meta">
@@ -260,8 +260,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-14T11:33:19+08:00">
-                2017-12-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-20T07:49:50+08:00">
+                2017-12-20
               </time>
             
 
@@ -298,7 +298,8 @@
       
 
       
-        <p><strong>Abstract</strong><br>我们推出<code>mesos</code>，一个可以在不同计算框架(computing frameworks)（例如hadoop，MPI）之间，共享资源的平台。共享资源能提交提高集群的资源利用率，避免每个应用数据复制。Mesos以细粒度的方式来资源共享，允许多种框架通过顺序读取每台机器上的数据来实现数据本地化(data liocality)。为支持现在frameworks复杂的调度，Mesos提出一种叫资源供给(resource offers)的分布式两层级调度机制。Mesos决定给每一个框架多少资源，同时，框架决定接受哪个资源以及将特定计算分配给特定资源。我们的结果显示Mesos可以在有不同框架的集群中实现近似最佳的数据本地化，集群的节点可以扩展到50000个，并实现HA。<br><strong>Introduction</strong><br>服务器集群已成为一个大型计算平台，</p>
+        <p>绵延的山路上有座牌坊<br>高大而鲜亮<br>牌坊的这头通向前世<br>牌坊的那头通向今生 </p>
+<p>矮小的山丘上有盏路灯<br>灯光熹微昏黄<br>照得到的地方是地狱<br>照不到的地方是天堂</p>
 
       
     </div>
@@ -323,8 +324,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/14/linux_filesystem_ops/" rel="next" title="Linux磁盘操作">
-                <i class="fa fa-chevron-left"></i> Linux磁盘操作
+              <a href="/2017/12/14/yum_repo/" rel="next" title="RedHat 替换yum源">
+                <i class="fa fa-chevron-left"></i> RedHat 替换yum源
               </a>
             
           </div>
@@ -332,10 +333,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/14/metal_or_vm/" rel="prev" title="容器部署：裸机，虚机哪个更好？">
-                容器部署：裸机，虚机哪个更好？ <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
