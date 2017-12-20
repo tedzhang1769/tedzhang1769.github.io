@@ -231,6 +231,143 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://tedzhang.cc/2017/12/14/metal_or_vm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ted1769">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="追寻事">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/14/metal_or_vm/" itemprop="url">容器部署：裸机，虚机哪个更好？</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-14T11:33:19+08:00">
+                2017-12-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>翻译自：<a href="http://containerjournal.com/2017/01/25/better-containers-bare-metal-virtual-machines/" target="_blank" rel="noopener">http://containerjournal.com/2017/01/25/better-containers-bare-metal-virtual-machines/</a></p>
+<p><code>Docker</code>部署时，一个重要的问题：部署在裸机上还是虚机？</p>
+<ul>
+<li>裸机的优势：<ul>
+<li>更好的性能。性能的测试可以看看这篇<a href="https://www.stratoscale.com/blog/containers/running-containers-on-bare-metal/" target="_blank" rel="noopener">性能测试</a></li>
+<li>能访问特殊设备</li>
+<li>相对于裸机的非容器化app，更具移植性(protable)</li>
+</ul>
+</li>
+<li>裸机的劣势（是不是就是虚机的优势？）：  <ul>
+<li>相对于非容器化的App，还是有性能损失</li>
+<li>缺少隔离性，vm有一层重型的hypervisor隔离租户和宿主机，但这并不意味着docker就不安全或者不够稳定。</li>
+<li>相对于vm（具备instance复制），需要重新安装docker，或从habor重新拉取image，尽量这并不难，但是额外增加了操作， 相对缺少移植性。</li>
+</ul>
+</li>
+<li>总结：视情况而定</li>
+</ul>
+<p>承接上面五个字(<em><code>It depends</code></em>),<a href="https://blog.docker.com/2016/04/physical-virtual-container-deployment/" target="_blank" rel="noopener">这</a>是另外一篇相关的讨论,如下。<br>任何IT的决定都由n个因素决定：<code>Performance</code>, <code>scalability</code>, <code>reliability</code>, <code>security</code>, <code>existing systems</code>, <code>current skillsets</code>, and <code>cost</code> （仅举这几个)。所以，当有人决定要在生产环境上容器时，这些因素都应考虑(<code>merit consideration</code>)<br>docker 允许相关人员无视底层的差异无缝（<code>seamlessly</code>）部署applications，不管是裸机还是VM,不管是Datacenter 还是 公有云。但是往哪里部署，这就视情况而定啦。<br>关键是，不要被其中任何一个所局限。你可以轻而易举地从这移植到那里。但是这么多选择，你就得好好斟酌了，这不仅取决于你现在做的，还取决于你将来用它来做什么。<br>所以，我无法确切回答你“应该哪哪部署app”的问题，不过我可以提供一些因素帮助你做决定。<br><code>Latency</code>:不能容忍延迟的应用，放在裸机上更好。这适用于金融行业（例如：交易系统就是个典型例子）<br><code>Capacity</code>:VM 通过优化系统负载来（<code>make their bones</code>），如果你的容器化应用不会消耗物理机上的所有容量，虚机可能更好。<br><code>Mixed Workloads</code>:裸机只能运行一个os实例，如果你想在同一台机器上跑Windows和Linux 容器，虚机更好。<br><code>Disaster Recovery</code>: </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://tedzhang.cc/2017/12/14/mesos_intro/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1564,167 +1701,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://tedzhang.cc/2017/12/14/es_learn-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ted1769">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="追寻事">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/14/es_learn-1/" itemprop="url">ES学习笔记1</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-14T11:33:19+08:00">
-                2017-12-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="ES和RDBMS概念对比"><a href="#ES和RDBMS概念对比" class="headerlink" title="ES和RDBMS概念对比"></a><code>ES</code>和<code>RDBMS</code>概念对比</h3><table>
-<thead>
-<tr>
-<th>ES</th>
-<th style="text-align:right">RDBMS</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>index</td>
-<td style="text-align:right">database</td>
-</tr>
-<tr>
-<td>type</td>
-<td style="text-align:right">table</td>
-</tr>
-<tr>
-<td>document</td>
-<td style="text-align:right">row</td>
-</tr>
-<tr>
-<td>field</td>
-<td style="text-align:right">column</td>
-</tr>
-</tbody>
-</table>
-<h4 id="安装ES"><a href="#安装ES" class="headerlink" title="安装ES"></a><strong>安装ES</strong></h4><h6 id="配置"><a href="#配置" class="headerlink" title="配置"></a><strong>配置</strong></h6><ul>
-<li>不依赖<code>zookeeper</code>,有自己的分布式协调机制</li>
-<li>在<code>$ES_HOME/config/elasticsearch.yml</code>配置：<br><code>cluster.name</code>同一个集群必须相同，<code>nodename</code>不能相同，一般是hostname；<br>要配置<code>network.host</code>才能别的机器或者网卡访问，否则只能是127.0.0.1或者localhost访问</li>
-<li>yaml 文件的 配置项一定要顶格写，要不然报错,<code>:</code>后面要有一个空格。</li>
-<li>/bin/elasticsearch 不能用root启动，因为之前出过事,改为其他用户<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">useradd elasticsearch</span><br><span class="line">groupadd elasticsearch elasticsearch</span><br><span class="line">chown -R elasticsearch:elasticsearch $ES_HOME/../</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><code>es</code> 默认端口：9200,<code>kibana</code> 默认端口:5601</p>
-<h4 id="安装Kibana"><a href="#安装Kibana" class="headerlink" title="安装Kibana"></a><strong>安装Kibana</strong></h4><ul>
-<li>在<code>es</code>集群的任意一台机器上安装</li>
-<li>Kibana安装目录中，<code>config/kibana.yml</code>:<br><code>elasticsearch.url:http://IP:9200</code>,该IP可以是es集群中的任意一台。 </li>
-<li><p>安装Marve插件 - es的集群监控工具</p>
-</li>
-<li><p>POST  和 PUT 的区别<br>:   <code>post</code> 一般用于新增，作用于资源集合<br>:   <code>put</code>  一般用于修改，作用于单个资源</p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1775,7 +1751,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">Artikel</span>
                 </a>
               </div>

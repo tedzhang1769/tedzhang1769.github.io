@@ -231,6 +231,167 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://tedzhang.cc/2017/12/14/es_learn-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ted1769">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="追寻事">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/14/es_learn-1/" itemprop="url">ES学习笔记1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-14T11:33:19+08:00">
+                2017-12-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="ES和RDBMS概念对比"><a href="#ES和RDBMS概念对比" class="headerlink" title="ES和RDBMS概念对比"></a><code>ES</code>和<code>RDBMS</code>概念对比</h3><table>
+<thead>
+<tr>
+<th>ES</th>
+<th style="text-align:right">RDBMS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>index</td>
+<td style="text-align:right">database</td>
+</tr>
+<tr>
+<td>type</td>
+<td style="text-align:right">table</td>
+</tr>
+<tr>
+<td>document</td>
+<td style="text-align:right">row</td>
+</tr>
+<tr>
+<td>field</td>
+<td style="text-align:right">column</td>
+</tr>
+</tbody>
+</table>
+<h4 id="安装ES"><a href="#安装ES" class="headerlink" title="安装ES"></a><strong>安装ES</strong></h4><h6 id="配置"><a href="#配置" class="headerlink" title="配置"></a><strong>配置</strong></h6><ul>
+<li>不依赖<code>zookeeper</code>,有自己的分布式协调机制</li>
+<li>在<code>$ES_HOME/config/elasticsearch.yml</code>配置：<br><code>cluster.name</code>同一个集群必须相同，<code>nodename</code>不能相同，一般是hostname；<br>要配置<code>network.host</code>才能别的机器或者网卡访问，否则只能是127.0.0.1或者localhost访问</li>
+<li>yaml 文件的 配置项一定要顶格写，要不然报错,<code>:</code>后面要有一个空格。</li>
+<li>/bin/elasticsearch 不能用root启动，因为之前出过事,改为其他用户<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">useradd elasticsearch</span><br><span class="line">groupadd elasticsearch elasticsearch</span><br><span class="line">chown -R elasticsearch:elasticsearch $ES_HOME/../</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><code>es</code> 默认端口：9200,<code>kibana</code> 默认端口:5601</p>
+<h4 id="安装Kibana"><a href="#安装Kibana" class="headerlink" title="安装Kibana"></a><strong>安装Kibana</strong></h4><ul>
+<li>在<code>es</code>集群的任意一台机器上安装</li>
+<li>Kibana安装目录中，<code>config/kibana.yml</code>:<br><code>elasticsearch.url:http://IP:9200</code>,该IP可以是es集群中的任意一台。 </li>
+<li><p>安装Marve插件 - es的集群监控工具</p>
+</li>
+<li><p>POST  和 PUT 的区别<br>:   <code>post</code> 一般用于新增，作用于资源集合<br>:   <code>put</code>  一般用于修改，作用于单个资源</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://tedzhang.cc/2017/12/14/docker_guide-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1593,7 +1754,7 @@ cp config.dist config</code></p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">Artikel</span>
                 </a>
               </div>
