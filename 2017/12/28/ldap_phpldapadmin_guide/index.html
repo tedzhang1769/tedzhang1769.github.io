@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>rh6.8 环境搭建 ldap + phpldapadmin | 追寻事</title>
+  <meta name="description" content="" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="/css/component.css" />
+  <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+  <meta name="generator" content="追寻事">
+  <script src="http://static.duoshuo.com/embed.js"></script>
+  
+  
+  
+
+  
+
+</head>
+<body>
+<div class="container">
+    <div class="mp-pusher" id="mp-pusher">
+        <i id="scroll-up" class="fa fa-angle-up"></i>
+        <nav id="mp-menu" class="mp-menu">
+            <div class="mp-level">
+                <a data-pjax class="back-home" style="font-size: 20px" href="/"><h2 ><i class="fa fa-home"></i>
+                        Home</h2></a>
+                <ul class="first-level">
+                    <li>
+                        <a class="fa fa-archive" href="#"><i class="fa fa-angle-left">
+                            </i>&nbsp;&nbsp;Archive</a>
+                        <div class="mp-level page-list">
+                            <h2 ><i class="fa fa-archive"></i>
+                                Archive</h2>
+                            <a class="mp-back" href="#">back</a>
+                            <form id="search-form" action="">
+                                <input type="text" class="search search-archive" placeholder="Search.."/>
+                            </form>
+                            <ul>
+                                <div class="mp-scroll">
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2018/03/02/prometheus&amp;grafana/">Prometheus+Grafana 建立监控体系</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2018/01/11/ldap_client_guide/">Linux 使用ldap 作为认证服务器</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/28/ldap_phpldapadmin_guide/">rh6.8 环境搭建 ldap + phpldapadmin</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/20/light/">灯</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/20/poem_life/">牌坊</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/14/yum_repo/">RedHat 替换yum源</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/14/yarn_debug/">YARN 启动远程调试</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/14/yarn_architecture/">Yarn-Architecture</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/14/vagrant_guide/">vagrant 简明教程</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/14/springboot_jpa_thymeleaf/">用idea 从 0 开始搭建 spring boot + jpa + thymeleaf</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/14/python_yield/">yield 探讨</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/14/python_guide-1/">python 基础</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/14/python_django/">python-django</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/14/metal_or_vm/">容器部署：裸机，虚机哪个更好？</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/14/mesos_intro/">Mesos：数据中心的细粒度资源共享平台</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/14/linux_filesystem_ops/">Linux磁盘操作</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/14/kafka_reset_topic/">Kafka 重置topic</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/14/kafka_config/">Kafka 主要配置参数概览</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/14/go_mem_model/">Golang内存模型</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/14/go_lib/">Golang 常见标准库</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/14/go_guide-1/">Go 笔记（一）</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/14/git_guide-2/">Git 使用教程(二)</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/14/git_guide-1/">Git 使用教程(一)</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/14/es_learn-1/">ES学习笔记1</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/14/docker_guide-1/">docker guide (1)</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/14/docker_command/">Docker 命令</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/14/compiler_pricinpel/">编译原理基础</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/14/centos7.3_smokeping/">centos7.3 安装 smokeping</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/14/centos_r_sparkr/">CentOS 6.5 安装R 和 RStudio 以及 SparkR</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/14/cdh_optimizer/">CDH 调优</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/14/cdh_offline_install/">CDH5.4.2 离线安装 - rhel6.6</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/12/14/bash_script-1/">bash 脚本笔记</a>
+                                </li>
+                                
+                                </div>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="fa fa-copy" href="#"><i class="fa fa-angle-left">
+                            </i>&nbsp;&nbsp;Categories</a>
+
+                        <div class="mp-level page-list">
+                            <h2 ><i class="fa fa-copy"></i>
+                                Categories</h2>
+                            <a class="mp-back" href="#">back</a>
+                            <form id="search-form" action="">
+                                <input type="text" class="search search-category" placeholder="Search.."/>
+                            </form>
+                            <ul>
+                                <div class="mp-scroll">
+                                
+                                </div>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="fa fa-tags" href="#"><i class="fa fa-angle-left">
+                            </i>&nbsp;&nbsp;Tags</a>
+                        <div class="mp-level page-list">
+                            <h2 ><i class="fa fa-tags"></i>
+                                Tags</h2>
+                            <a class="mp-back" href="#">back</a>
+                            <form id="search-form" action="">
+                                <input type="text" class="search search-tag" placeholder="Search.."/>
+                            </form>
+                            <ul>
+                                <div class="mp-scroll">
+                                
+                                </div>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <li class="mp-pjax"><a class="fa fa-user" href="/about">&nbsp;&nbsp;&nbsp;About me</a></li>
+                    <li><a class="fa fa-github" href="#">&nbsp;&nbsp;&nbsp;Github</a></li>
+
+                </ul>
+
+            </div>
+        </nav>
+        <div id="pjax">
+            <div class="pjax-hidden" style="display: none">
+                
+                    <a  data-pjax href="/2018/03/02/prometheus&amp;grafana/">Prometheus+Grafana 建立监控体系</a>
+                
+                    <a  data-pjax href="/2018/01/11/ldap_client_guide/">Linux 使用ldap 作为认证服务器</a>
+                
+                    <a  data-pjax href="/2017/12/28/ldap_phpldapadmin_guide/">rh6.8 环境搭建 ldap + phpldapadmin</a>
+                
+                    <a  data-pjax href="/2017/12/20/light/">灯</a>
+                
+                    <a  data-pjax href="/2017/12/20/poem_life/">牌坊</a>
+                
+                    <a  data-pjax href="/2017/12/14/yum_repo/">RedHat 替换yum源</a>
+                
+                    <a  data-pjax href="/2017/12/14/yarn_debug/">YARN 启动远程调试</a>
+                
+                    <a  data-pjax href="/2017/12/14/yarn_architecture/">Yarn-Architecture</a>
+                
+                    <a  data-pjax href="/2017/12/14/vagrant_guide/">vagrant 简明教程</a>
+                
+                    <a  data-pjax href="/2017/12/14/springboot_jpa_thymeleaf/">用idea 从 0 开始搭建 spring boot + jpa + thymeleaf</a>
+                
+                    <a  data-pjax href="/2017/12/14/python_yield/">yield 探讨</a>
+                
+                    <a  data-pjax href="/2017/12/14/python_guide-1/">python 基础</a>
+                
+                    <a  data-pjax href="/2017/12/14/python_django/">python-django</a>
+                
+                    <a  data-pjax href="/2017/12/14/metal_or_vm/">容器部署：裸机，虚机哪个更好？</a>
+                
+                    <a  data-pjax href="/2017/12/14/mesos_intro/">Mesos：数据中心的细粒度资源共享平台</a>
+                
+                    <a  data-pjax href="/2017/12/14/linux_filesystem_ops/">Linux磁盘操作</a>
+                
+                    <a  data-pjax href="/2017/12/14/kafka_reset_topic/">Kafka 重置topic</a>
+                
+                    <a  data-pjax href="/2017/12/14/kafka_config/">Kafka 主要配置参数概览</a>
+                
+                    <a  data-pjax href="/2017/12/14/go_mem_model/">Golang内存模型</a>
+                
+                    <a  data-pjax href="/2017/12/14/go_lib/">Golang 常见标准库</a>
+                
+                    <a  data-pjax href="/2017/12/14/go_guide-1/">Go 笔记（一）</a>
+                
+                    <a  data-pjax href="/2017/12/14/git_guide-2/">Git 使用教程(二)</a>
+                
+                    <a  data-pjax href="/2017/12/14/git_guide-1/">Git 使用教程(一)</a>
+                
+                    <a  data-pjax href="/2017/12/14/es_learn-1/">ES学习笔记1</a>
+                
+                    <a  data-pjax href="/2017/12/14/docker_guide-1/">docker guide (1)</a>
+                
+                    <a  data-pjax href="/2017/12/14/docker_command/">Docker 命令</a>
+                
+                    <a  data-pjax href="/2017/12/14/compiler_pricinpel/">编译原理基础</a>
+                
+                    <a  data-pjax href="/2017/12/14/centos7.3_smokeping/">centos7.3 安装 smokeping</a>
+                
+                    <a  data-pjax href="/2017/12/14/centos_r_sparkr/">CentOS 6.5 安装R 和 RStudio 以及 SparkR</a>
+                
+                    <a  data-pjax href="/2017/12/14/cdh_optimizer/">CDH 调优</a>
+                
+                    <a  data-pjax href="/2017/12/14/cdh_offline_install/">CDH5.4.2 离线安装 - rhel6.6</a>
+                
+                    <a  data-pjax href="/2017/12/14/bash_script-1/">bash 脚本笔记</a>
+                
+                
+                
+                <a data-pjax class="fa fa-user" href="/about">&nbsp;&nbsp;&nbsp;About me</a>
+            </div>
+            <nav class="nexus">
+                <li  style="border-left: 1px solid #c6d0da;">
+                    <a id="trigger" href="#"><i class="fa fa-bars"></i></a>
+                </li>
+                <li ><a id="nexus-back" data-pjax href="/">追寻事</a></li>
+                
+                <div id="nav-container">
+                    <div class="post-navbar" style="line-height: 63px;display:none">
+                        <li id="navbar-title"><a href="#">rh6.8 环境搭建 ldap + phpldapadmin</a></li>
+                        <li id="navbar-toc" style="border-left: none">
+                            <a style="padding-right: 15px">
+                                <span id="toc-content" >Introduction</span><i class="fa fa-chevron-down" ></i>
+                            </a>
+                            <div class="hidden-box">
+                                <ul id="toc"></ul>
+                            </div>
+                        </li>
+                    </div>
+                </div>
+                
+            </nav>
+
+            <div class="scroller">
+            <div class="scroller-inner">
+
+
+<!-- -->
+<!--<body class="post-template">-->
+<!---->
+  
+
+<main class="content" role="main">
+    <article class="post" >
+    <span class="post-meta">
+                  <div class="tag-tile">
+                      
+                  </div>
+                <h1 class="post-title" style="margin: 14px 0;color:#50585D">rh6.8 环境搭建 ldap + phpldapadmin</h1>
+
+                    <div class="post-meta">
+                        Post on<span class="fa fa-clock-o"></span>
+                        <time datetime="2017-12-28T01:31:43.198Z"
+                              itemprop="datePublished">2017-12-28</time>
+                    </div>
+    </span>
+
+        <section class="post-content">
+            <h3 id="前置条件-rh6-8-iso-挂载作为本地yum源"><a href="#前置条件-rh6-8-iso-挂载作为本地yum源" class="headerlink" title="前置条件 rh6.8 iso 挂载作为本地yum源"></a>前置条件 rh6.8 iso 挂载作为本地yum源</h3><h3 id="安装OpenLDAP"><a href="#安装OpenLDAP" class="headerlink" title="安装OpenLDAP"></a>安装OpenLDAP</h3><p> <code>yum install openldap openldap-* -y</code></p>
+<p>查看：<code>rpm -qa | grep openldap</code><br>可以看到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">openldap-clients-2.4.40-12.el6.x86_64</span><br><span class="line">openldap-2.4.40-12.el6.x86_64</span><br><span class="line">openldap-devel-2.4.40-12.el6.x86_64</span><br><span class="line">openldap-servers-2.4.40-12.el6.x86_64</span><br></pre></td></tr></table></figure></p>
+<h3 id="配置ldap，包括DB-CONFIG-和-slapd-conf"><a href="#配置ldap，包括DB-CONFIG-和-slapd-conf" class="headerlink" title="配置ldap，包括DB_CONFIG 和 slapd.conf"></a>配置ldap，包括DB_CONFIG 和 slapd.conf</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG</span><br><span class="line">cp /usr/share/openldap-servers/slapd.conf.obsolete /etc/openldap/slapd.conf</span><br></pre></td></tr></table></figure>
+<h3 id="生成-ldap-管理员密码-下面会用到"><a href="#生成-ldap-管理员密码-下面会用到" class="headerlink" title="生成 ldap 管理员密码,下面会用到"></a>生成 ldap 管理员密码,下面会用到</h3><p><code>slappasswd -s ldap &gt;&gt; /root/ldap_pw</code></p>
+<h3 id="修改slapd-conf，主要配置dc和rootpw"><a href="#修改slapd-conf，主要配置dc和rootpw" class="headerlink" title="修改slapd.conf，主要配置dc和rootpw"></a>修改slapd.conf，主要配置dc和rootpw</h3><p><code>sed -i &#39;s#dc=my-domain#dc=china#g&#39; /etc/openldap/slapd.conf</code><br>可以看到 <code>suffix</code> <code>rootdn</code> 都改成了想要的dc了。<br>添加rootpw<br><code>rootpw   {SSHA}hmFq6su/1aUnM954IYc8chaWcy5lLOXd</code></p>
+<h3 id="检测并重新生成ldap数据库"><a href="#检测并重新生成ldap数据库" class="headerlink" title="检测并重新生成ldap数据库"></a>检测并重新生成ldap数据库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/openldap</span><br><span class="line">rm -rf slapd.d/*</span><br><span class="line">slaptest -f /etc/openldap/slapd.conf -F /etc/openldap/slapd.d/</span><br></pre></td></tr></table></figure>
+<p>可能会报错，说failed的，不知道你们有没有碰到，反正我是碰到了。别管它，不影响。</p>
+<h3 id="修改ldap相关文件的权限"><a href="#修改ldap相关文件的权限" class="headerlink" title="修改ldap相关文件的权限"></a>修改ldap相关文件的权限</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chown -R ldap:ldap /var/lib/ldap/</span><br><span class="line">chown -R ldap:ldap /etc/openldap/</span><br></pre></td></tr></table></figure>
+<h3 id="启动sldap服务"><a href="#启动sldap服务" class="headerlink" title="启动sldap服务"></a>启动sldap服务</h3><p><code>/etc/init.d/sldap start</code><br>查看进程<br><code>ps aux | grep ldap</code></p>
+<h3 id="安装migrationtools"><a href="#安装migrationtools" class="headerlink" title="安装migrationtools"></a>安装migrationtools</h3><p><code>yum install migrationtools -y</code></p>
+<p>###修改 /usr/share/migrationtools/migrate_common.ph 配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$DEFAULT_MAIL_DOMAIN = &quot;china.com&quot;;</span><br><span class="line">$DEFAULT_BASE = &quot;dc=china,dc=com&quot;;</span><br></pre></td></tr></table></figure></p>
+<h3 id="生成-base-ldif-文件"><a href="#生成-base-ldif-文件" class="headerlink" title="生成 base.ldif 文件"></a>生成 base.ldif 文件</h3><p><code>/usr/share/migrationtools/migrate_base.pl &gt;base.ldif</code></p>
+<h3 id="添加base-ldif-到-ldap"><a href="#添加base-ldif-到-ldap" class="headerlink" title="添加base.ldif 到 ldap"></a>添加base.ldif 到 ldap</h3><p><code>ldapadd -x -D &quot;cn=Manager,dc=china,dc=com&quot; -W -f ./base.ldif</code><br>提示输入管理员密码。</p>
+<h3 id="查询一下，看是否加入成功"><a href="#查询一下，看是否加入成功" class="headerlink" title="查询一下，看是否加入成功"></a>查询一下，看是否加入成功</h3><p><code>ldapsearch -x -D &quot;cn=Manager,dc=china,dc=com&quot; -b &quot;ou=Aliases,dc=china,dc=com&quot; -W</code></p>
+<h3 id="安装phpldapadmin"><a href="#安装phpldapadmin" class="headerlink" title="安装phpldapadmin"></a>安装phpldapadmin</h3><p><code>yum install httpd -y</code><br>因为没有配置phpldapadmin的yum源，我们下载下来<a href="ftp://mirror.switch.ch/pool/4/mirror/epel/6/x86_64/Packages/p/phpldapadmin-1.2.3-10.el6.noarch.rpm" target="_blank" rel="noopener">官方地址</a>，本地安装,<br><code>yum localinstall -y phpldapadmin-1.2.3-10.el6.noarch.rpm</code></p>
+<h3 id="配置etc-httpd-conf-d-phpldapadmin-conf"><a href="#配置etc-httpd-conf-d-phpldapadmin-conf" class="headerlink" title="配置etc/httpd/conf.d/phpldapadmin.conf"></a>配置etc/httpd/conf.d/phpldapadmin.conf</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Directory /usr/share/phpldapadmin/htdocs&gt;  </span><br><span class="line">  Order Deny,Allow  </span><br><span class="line">  Allow from all  </span><br><span class="line">&lt;/Directory&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="修改-etc-phpldapadmin-config-php"><a href="#修改-etc-phpldapadmin-config-php" class="headerlink" title="修改/etc/phpldapadmin/config.php"></a>修改/etc/phpldapadmin/config.php</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$servers-&gt;setValue(&apos;login&apos;,&apos;attr&apos;,&apos;dn&apos;); --待解决 dn和uid 配置的不同</span><br><span class="line"></span><br><span class="line">$servers-&gt;newServer(&apos;ldap_pla&apos;);</span><br><span class="line">$servers-&gt;setValue(&apos;server&apos;,&apos;name&apos;,&apos;china&apos;);</span><br><span class="line">$servers-&gt;setValue(&apos;server&apos;,&apos;host&apos;,&apos;hadoop&apos;);</span><br><span class="line">$servers-&gt;setValue(&apos;server&apos;,&apos;port&apos;,389);</span><br><span class="line">$servers-&gt;setValue(&apos;server&apos;,&apos;base&apos;,array(&apos;dc=china,dc=com&apos;));</span><br><span class="line">$servers-&gt;setValue(&apos;login&apos;,&apos;auth_type&apos;,&apos;cookie&apos;);</span><br><span class="line">$servers-&gt;setValue(&apos;login&apos;,&apos;bind_id&apos;,&apos;&apos;);</span><br><span class="line">$servers-&gt;setValue(&apos;login&apos;,&apos;bind_pass&apos;,&apos;&apos;);</span><br><span class="line">$servers-&gt;setValue(&apos;server&apos;,&apos;tls&apos;,false);</span><br></pre></td></tr></table></figure>
+<h3 id="启动httpd，打开phpldapadmin-并登陆"><a href="#启动httpd，打开phpldapadmin-并登陆" class="headerlink" title="启动httpd，打开phpldapadmin 并登陆"></a>启动httpd，打开phpldapadmin 并登陆</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service httpd restart</span><br><span class="line">chkconfig httpd on</span><br></pre></td></tr></table></figure>
+<p>在浏览器输入:<br><code>hadoop/phpldapadmin</code><br>登录时，登录DN输入：<code>cn=Manager,dc=china,dc=com</code><br>密码就是当时设置的密码 , 如果是管理员需要操作，请 <strong>不要勾选anonymous</strong></p>
+
+        </section>
+        <hr/>
+        <nav class="pagination" style="width:auto" role="pagination">
+            
+            <a data-pjax class="newer-posts" href="/2018/01/11/ldap_client_guide/">← Prev Post</a>
+            
+            <a class="share-button" data-original-title title>Share this Post</a>
+            
+            <a data-pjax class="older-posts" href="/2017/12/20/light/">Next Post →</a>
+            
+        </nav>
+        <br/>
+        <br/>
+        <section id="comment">
+            <div id="comment-box"></div>
+        </section>
+
+
+    </article>
+</main>
+
+
+  
+<footer class="site-footer">
+    
+    <div class="inner">
+        <section class="copyright"><a href="/"></a> &copy; 追寻事 2014</section>
+        <section class="poweredby">Published with <a target="_blank" href="http://hexo.io/">Hexo   </a> and Theme by <a target="_blank" href="https://github.com/yuche/hexo-theme-kael">Kael</a></section>
+    </div>
+</footer>
+</div>
+</div><!-- /scroller -->
+
+</div><!-- /pusher -->
+</div><!-- /container -->
+</div>
+
+<!-- Easter eggs -->
+
+<div class="egg animated">
+    <a id="close-button" href="#">X</a>
+    <div class="block">
+        <div class="loading">
+            <span class="ball1"></span>
+            <span class="ball2"></span>
+        </div>
+    </div>
+</div>
+  
+<script src="//cdn.staticfile.org/jquery/1.11.0/jquery.min.js"></script>
+<script>
+    if (!window.jQuery) {
+        var script = document.createElement('script');
+        script.src = "/js/jquery.min.js";
+        document.body.appendChild(script);
+    }
+</script>
+<script type="text/javascript" src="/js/lib.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+
+
+
+
+
+
+
+</body>
+</html>
