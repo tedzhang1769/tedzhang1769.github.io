@@ -43,6 +43,10 @@
                                 <div class="mp-scroll">
                                 
                                 <li class="search-archive-li mp-pjax">
+                                    <a href="/2018/03/06/etcd_install/">etcd 集群搭建</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
                                     <a href="/2018/03/02/prometheus&amp;grafana/">Prometheus+Grafana 建立监控体系</a>
                                 </li>
                                 
@@ -220,6 +224,8 @@
         <div id="pjax">
             <div class="pjax-hidden" style="display: none">
                 
+                    <a  data-pjax href="/2018/03/06/etcd_install/">etcd 集群搭建</a>
+                
                     <a  data-pjax href="/2018/03/02/prometheus&amp;grafana/">Prometheus+Grafana 建立监控体系</a>
                 
                     <a  data-pjax href="/2018/01/11/ldap_client_guide/">Linux 使用ldap 作为认证服务器</a>
@@ -320,6 +326,32 @@
   
 <main class="content" role="main">
 
+    
+    <article class="post">
+
+        <header class="post-header">
+            <div class="tag-tile">
+                
+                <span class="fa fa-bookmark" style="float:right;color:#f39c12"></span>
+            </div>
+            <h1 class="post-title"><a data-pjax href="/2017/12/14/cdh_optimizer/">CDH 调优</a>
+            </h1>
+
+            <div class="post-meta">
+                Post on<span class="fa fa-clock-o"></span>
+                <time datetime="2017-12-14T03:33:19.921Z"
+                      itemprop="datePublished">2017-12-14</time>
+            </div>
+        </header>
+        <section class="post-excerpt">
+            <p>
+                
+                最近集群扩容，但是看了一下Yarn任务，还是很慢，是不是上一次没有优化。重新翻开配置，配置参数主要参考了hdp的文档,输入了机器的配置情况，python yarn-utils.py -c 32 -m 64 -d 12 -k True12345678910111213141516Using cores=32 memory=64GB disks=12 hbase=TrueProfile: cores=32 memory=49152MB re
+                
+            </p>
+            
+        </section>
+    </article>
     
     <article class="post">
 

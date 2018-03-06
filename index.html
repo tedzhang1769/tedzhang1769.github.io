@@ -43,6 +43,10 @@
                                 <div class="mp-scroll">
                                 
                                 <li class="search-archive-li mp-pjax">
+                                    <a href="/2018/03/06/etcd_install/">etcd 集群搭建</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
                                     <a href="/2018/03/02/prometheus&amp;grafana/">Prometheus+Grafana 建立监控体系</a>
                                 </li>
                                 
@@ -220,6 +224,8 @@
         <div id="pjax">
             <div class="pjax-hidden" style="display: none">
                 
+                    <a  data-pjax href="/2018/03/06/etcd_install/">etcd 集群搭建</a>
+                
                     <a  data-pjax href="/2018/03/02/prometheus&amp;grafana/">Prometheus+Grafana 建立监控体系</a>
                 
                     <a  data-pjax href="/2018/01/11/ldap_client_guide/">Linux 使用ldap 作为认证服务器</a>
@@ -320,6 +326,44 @@
   
 <main class="content" role="main">
 
+    
+    <article class="post">
+
+        <header class="post-header">
+            <div class="tag-tile">
+                
+                <span class="fa fa-bookmark" style="float:right;color:#f39c12"></span>
+            </div>
+            <h1 class="post-title"><a data-pjax href="/2018/03/06/etcd_install/">etcd 集群搭建</a>
+            </h1>
+
+            <div class="post-meta">
+                Post on<span class="fa fa-clock-o"></span>
+                <time datetime="2018-03-06T06:55:52.275Z"
+                      itemprop="datePublished">2018-03-06</time>
+            </div>
+        </header>
+        <section class="post-excerpt">
+            <p>
+                
+                概述etcd 是什么etcd is a distributed key value store that provides a reliable way to store data across a cluster of machines
+why etcdetcd 能做的 zookeeper 都能做，那为什么是 etcd 呢？
+Raft–etcd 的基石实践
+
+
+ip
+node-name
+
+
+
+
+10.137.37.200
+etcd-2
+                
+            </p>
+            
+        </section>
+    </article>
     
     <article class="post">
 
@@ -572,38 +616,6 @@ Why is Yarn  The fundamental idea of MRv2 is to split up the two major functiona
 安装Vagrantvagrant下载地址
 vagrant 使用设置工程home  mkdir vagrant2 &amp;&amp; cd vagrant2
 初始化环境vagrant init ubuntu/trusty64 查看 当前
-                
-            </p>
-            
-        </section>
-    </article>
-    
-    <article class="post">
-
-        <header class="post-header">
-            <div class="tag-tile">
-                
-                <span class="fa fa-bookmark" style="float:right;color:#f39c12"></span>
-            </div>
-            <h1 class="post-title"><a data-pjax href="/2017/12/14/springboot_jpa_thymeleaf/">用idea 从 0 开始搭建 spring boot + jpa + thymeleaf</a>
-            </h1>
-
-            <div class="post-meta">
-                Post on<span class="fa fa-clock-o"></span>
-                <time datetime="2017-12-14T03:33:19.955Z"
-                      itemprop="datePublished">2017-12-14</time>
-            </div>
-        </header>
-        <section class="post-excerpt">
-            <p>
-                
-                idea 指导1 File -&gt; New -&gt; Project -&gt; Spring Initializr2 SDK 选择 1.83 Project Metedata 默认4 Dependencies 里面
-左边Web 选择Web
-左边Template Engines 选择 Thymeleaf
-左边SQL 选择 JPA （JPA是封装了Hibernate的数据库连接组件）
-
-5 其他默认如此，idea的操作完成。
-接下来
                 
             </p>
             
